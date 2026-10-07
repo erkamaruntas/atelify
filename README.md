@@ -8,7 +8,7 @@ Atelify, yapay zekâ destekli bir mücevher tasarım stüdyosudur. Kullanıcı b
 
 > **Portföy projesi.** Ödemeler iyzico'nun test ortamında (sandbox) çalışır; gerçek tahsilat yapılmaz.
 
-[![Tanıtım videosunu izle (57 sn)](assets/video/atelify-tanitim-poster.jpg)](assets/video/atelify-tanitim.mp4)
+[![Tanıtım videosunu izle (57 sn)](assets/video/atelify-tanitim-poster.jpg)](https://atelify.aruntas.com/assets/video/atelify-tanitim.mp4)
 
 <sub>▶ Tanıtım videosu (57 sn) — görsele tıklayarak izleyebilirsin.</sub>
 
