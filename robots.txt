@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /studio
+
+Sitemap: https://atelify.aruntas.com/sitemap.xml

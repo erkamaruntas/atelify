@@ -1,0 +1,22 @@
+{
+  "name": "atelify",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "test": "vitest",
+    "migrate": "node scripts/migrate.mjs up",
+    "migrate:status": "node scripts/migrate.mjs status",
+    "migrate:baseline": "node scripts/migrate.mjs baseline"
+  },
+  "dependencies": {
+    "@fal-ai/client": "^1.10.0",
+    "@supabase/supabase-js": "^2.105.3",
+    "iyzipay": "^2.0.69",
+    "pg": "^8.21.0",
+    "sharp": "^0.34.5"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.7"
+  }
+}

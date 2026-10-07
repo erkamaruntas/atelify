@@ -1,0 +1,558 @@
+{
+  "version": 3,
+  "defaults": {
+    "canvas": { "width": 1024, "height": 1024 },
+    "engraving": {
+      "blend": "over",
+      "opacity": 0.52,
+      "rotation": 0,
+      "lineColor": "#24180c",
+      "shadow": { "opacity": 0.12, "blur": 0.8, "offsetX": 1, "offsetY": 1 },
+      "highlight": { "opacity": 0.08, "blur": 0.3, "offsetX": -1, "offsetY": -1 },
+      "mask": {
+        "threshold": 238,
+        "gain": 1.85,
+        "gamma": 1.08,
+        "blur": 0.25,
+        "backgroundCutoff": 136,
+        "minDarkness": 0.92,
+        "alphaFloor": 24
+      }
+    }
+  },
+  "sidePrint": {
+    "yuzuk": {
+      "assetLeft": "side/shoulder-yuzuk-left.png",
+      "assetRight": "side/shoulder-yuzuk-right.png",
+      "molds": {
+        "altin": {
+          "assetLeft": "side/shoulder-yuzuk-altin-left.png",
+          "assetRight": "side/shoulder-yuzuk-altin-right.png"
+        },
+        "rose": {
+          "assetLeft": "side/shoulder-yuzuk-rose-left.png",
+          "assetRight": "side/shoulder-yuzuk-rose-right.png"
+        }
+      },
+      "shoulderScale": 0.72,
+      "overlap": 0,
+      "outerMargin": 0.05,
+      "verticalAlign": 0.4,
+      "background": "#ffffff",
+      "trim": true,
+      "assetPattern": "side/shoulder-{key}-{side}.png",
+      "defaultKey": "yuzuk",
+      "emblemBlend": "multiply",
+      "emblemOpacity": 0.6,
+      "emblemPlacement": { "centerX": 0.5, "centerY": 0.31, "box": 0.35 },
+      "options": [
+        { "key": "yuzuk", "label": "Düz (baskısız)" },
+        { "key": "walker", "label": "Morgan" },
+        { "key": "melendez", "label": "JRF" },
+        { "key": "bossu", "label": "MFB" },
+        { "key": "panihidina", "label": "Kanat" },
+        { "key": "grogan", "label": "Yılan" },
+        { "key": "queen", "label": "Kuru kafa" },
+        { "key": "borstorff", "label": "Triquetra" },
+        { "key": "thomas", "label": "Zambak" },
+        { "key": "oliveira", "label": "Zambak 2" },
+        { "key": "figueroa", "label": "Haç" },
+        { "key": "petersson", "label": "1675 / TFS" },
+        { "key": "cabrera", "label": "Omega" },
+        { "key": "brockman", "label": "Chem" },
+        { "key": "sullivan", "label": "Aslan" },
+        { "key": "app", "label": "Aslan 2" },
+        { "key": "pitlanish", "label": "Kanatlı çark" },
+        { "key": "coffee", "label": "12.31.25" }
+      ]
+    }
+  },
+  "templates": {
+    "kare-s": {
+      "shape": "kare",
+      "size": "S",
+      "label": "Kare - S",
+      "measure": "1,3 x 1,3 cm",
+      "file": "kare-s.png",
+      "placement": { "centerX": 512, "centerY": 382, "width": 282, "height": 282 },
+      "engraving": { "opacity": 0.48, "rotation": 0, "blend": "over" }
+    },
+    "kare-m": {
+      "shape": "kare",
+      "size": "M",
+      "label": "Kare - M",
+      "measure": "1,5 x 1,5 cm",
+      "file": "kare-m.png",
+      "placement": { "centerX": 512, "centerY": 382, "width": 322, "height": 322 },
+      "engraving": { "opacity": 0.5, "rotation": 0, "blend": "over" }
+    },
+    "kare-l": {
+      "shape": "kare",
+      "size": "L",
+      "label": "Kare - L",
+      "measure": "1,7 x 1,7 cm",
+      "file": "kare-l.png",
+      "placement": { "centerX": 512, "centerY": 382, "width": 362, "height": 362 },
+      "engraving": { "opacity": 0.52, "rotation": 0, "blend": "over" }
+    },
+    "kare-xl": {
+      "shape": "kare",
+      "size": "XL",
+      "label": "Kare - XL",
+      "measure": "1,9 x 1,9 cm",
+      "file": "kare-xl.png",
+      "placement": { "centerX": 512, "centerY": 382, "width": 402, "height": 402 },
+      "engraving": { "opacity": 0.54, "rotation": 0, "blend": "over" }
+    },
+    "oval-s": {
+      "shape": "oval",
+      "size": "S",
+      "label": "Oval - S",
+      "measure": "1 x 1,2 cm",
+      "file": "oval-s.png",
+      "placement": { "centerX": 512, "centerY": 388, "width": 226, "height": 286 },
+      "engraving": { "opacity": 0.47, "rotation": 0, "blend": "over" }
+    },
+    "oval-m": {
+      "shape": "oval",
+      "size": "M",
+      "label": "Oval - M",
+      "measure": "1,1 x 1,5 cm",
+      "file": "oval-m.png",
+      "placement": { "centerX": 512, "centerY": 388, "width": 254, "height": 334 },
+      "engraving": { "opacity": 0.49, "rotation": 0, "blend": "over" }
+    },
+    "oval-l": {
+      "shape": "oval",
+      "size": "L",
+      "label": "Oval - L",
+      "measure": "1,2 x 1,8 cm",
+      "file": "oval-l.png",
+      "placement": { "centerX": 512, "centerY": 388, "width": 280, "height": 386 },
+      "engraving": { "opacity": 0.51, "rotation": 0, "blend": "over" }
+    },
+    "oval-xl": {
+      "shape": "oval",
+      "size": "XL",
+      "label": "Oval - XL",
+      "measure": "1,3 x 2,1 cm",
+      "file": "oval-xl.png",
+      "placement": { "centerX": 512, "centerY": 388, "width": 304, "height": 438 },
+      "engraving": { "opacity": 0.53, "rotation": 0, "blend": "over" }
+    },
+    "yuvarlak-s": {
+      "shape": "yuvarlak",
+      "size": "S",
+      "label": "Yuvarlak - S",
+      "measure": "1,2 x 1,2 cm",
+      "file": "yuvarlak-s.png",
+      "placement": { "centerX": 512, "centerY": 386, "width": 270, "height": 270 },
+      "engraving": { "opacity": 0.48, "rotation": 0, "blend": "over" }
+    },
+    "yuvarlak-m": {
+      "shape": "yuvarlak",
+      "size": "M",
+      "label": "Yuvarlak - M",
+      "measure": "1,4 x 1,4 cm",
+      "file": "yuvarlak-m.png",
+      "placement": { "centerX": 512, "centerY": 386, "width": 310, "height": 310 },
+      "engraving": { "opacity": 0.5, "rotation": 0, "blend": "over" }
+    },
+    "yuvarlak-l": {
+      "shape": "yuvarlak",
+      "size": "L",
+      "label": "Yuvarlak - L",
+      "measure": "1,6 x 1,6 cm",
+      "file": "yuvarlak-l.png",
+      "placement": { "centerX": 512, "centerY": 386, "width": 350, "height": 350 },
+      "engraving": { "opacity": 0.52, "rotation": 0, "blend": "over" }
+    },
+    "yuvarlak-xl": {
+      "shape": "yuvarlak",
+      "size": "XL",
+      "label": "Yuvarlak - XL",
+      "measure": "1,8 x 1,8 cm",
+      "file": "yuvarlak-xl.png",
+      "placement": { "centerX": 512, "centerY": 386, "width": 390, "height": 390 },
+      "engraving": { "opacity": 0.54, "rotation": 0, "blend": "over" }
+    },
+    "kare-foto-gumus-xl": {
+      "shape": "kare",
+      "size": "XL",
+      "label": "Fotoğraf Kare - Gümüş",
+      "measure": "1,9 x 1,9 cm",
+      "file": "kare-foto-gumus-xl-20260606.png",
+      "placement": { "centerX": 512, "centerY": 512, "width": 476, "height": 476 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 0.86,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "kare-foto-altin-xl": {
+      "shape": "kare",
+      "size": "XL",
+      "label": "Fotoğraf Kare - Altın",
+      "measure": "1,9 x 1,9 cm",
+      "file": "kare-foto-altin-xl-20260606.png",
+      "placement": { "centerX": 512, "centerY": 512, "width": 476, "height": 476 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 0.86,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "oval-foto-gumus-xl": {
+      "shape": "oval",
+      "size": "XL",
+      "label": "Fotoğraf Oval - Gümüş",
+      "measure": "1,3 x 2,1 cm",
+      "file": "oval-foto-gumus-xl.png",
+      "placement": { "centerX": 510, "centerY": 507, "width": 503, "height": 615 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "oval-foto-altin-xl": {
+      "shape": "oval",
+      "size": "XL",
+      "label": "Fotoğraf Oval - Altın",
+      "measure": "1,3 x 2,1 cm",
+      "file": "oval-foto-altin-xl.png",
+      "placement": { "centerX": 510, "centerY": 508, "width": 495, "height": 603 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "yuvarlak-foto-xl": {
+      "shape": "yuvarlak",
+      "size": "XL",
+      "label": "Fotoğraf Yuvarlak - Gümüş",
+      "measure": "1,8 x 1,8 cm",
+      "file": "yuvarlak-foto-xl.png",
+      "placement": { "centerX": 514, "centerY": 511, "width": 390, "height": 390 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "yuvarlak-foto-altin-xl": {
+      "shape": "yuvarlak",
+      "size": "XL",
+      "label": "Fotoğraf Yuvarlak - Altın",
+      "measure": "1,8 x 1,8 cm",
+      "file": "yuvarlak-foto-altin-xl.png",
+      "placement": { "centerX": 511, "centerY": 511, "width": 388, "height": 388 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "kolye-yuvarlak-foto-altin-xl": {
+      "shape": "yuvarlak",
+      "size": "XL",
+      "label": "Kolye Fotoğraf Yuvarlak - Altın",
+      "measure": "2 x 2 cm",
+      "file": "kolye-yuvarlak-foto-altin-xl.png",
+      "placement": { "centerX": 278, "centerY": 551, "width": 410, "height": 410 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "kolye-kare-foto-altin-xl": {
+      "shape": "kare",
+      "size": "XL",
+      "label": "Kolye Fotoğraf Kare - Altın",
+      "measure": "2 x 2 cm",
+      "file": "kolye-kare-foto-altin-xl.png",
+      "placement": { "centerX": 279, "centerY": 551, "width": 410, "height": 410 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "kolye-dikdortgen-foto-altin-xl": {
+      "shape": "dikdortgen",
+      "size": "XL",
+      "label": "Kolye Fotoğraf Dikdörtgen - Altın",
+      "measure": "2 x 2,8 cm",
+      "file": "kolye-dikdortgen-foto-altin-xl.png",
+      "placement": { "centerX": 279, "centerY": 582, "width": 355, "height": 482 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "kolye-oval-foto-altin-xl": {
+      "shape": "oval",
+      "size": "XL",
+      "label": "Kolye Fotoğraf Oval - Altın",
+      "measure": "1,7 x 2,3 cm",
+      "file": "kolye-oval-foto-altin-xl.png",
+      "placement": { "centerX": 279, "centerY": 563, "width": 321, "height": 430 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "kolye-yuvarlak-foto-gumus-xl": {
+      "shape": "yuvarlak",
+      "size": "XL",
+      "label": "Kolye Fotoğraf Yuvarlak - Gümüş",
+      "measure": "2 x 2 cm",
+      "file": "kolye-yuvarlak-foto-gumus-xl.png",
+      "placement": { "centerX": 278, "centerY": 551, "width": 410, "height": 410 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "kolye-kare-foto-gumus-xl": {
+      "shape": "kare",
+      "size": "XL",
+      "label": "Kolye Fotoğraf Kare - Gümüş",
+      "measure": "2 x 2 cm",
+      "file": "kolye-kare-foto-gumus-xl.png",
+      "placement": { "centerX": 279, "centerY": 551, "width": 410, "height": 410 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "kolye-dikdortgen-foto-gumus-xl": {
+      "shape": "dikdortgen",
+      "size": "XL",
+      "label": "Kolye Fotoğraf Dikdörtgen - Gümüş",
+      "measure": "2 x 2,8 cm",
+      "file": "kolye-dikdortgen-foto-gumus-xl.png",
+      "placement": { "centerX": 279, "centerY": 582, "width": 355, "height": 482 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "kolye-oval-foto-gumus-xl": {
+      "shape": "oval",
+      "size": "XL",
+      "label": "Kolye Fotoğraf Oval - Gümüş",
+      "measure": "1,7 x 2,3 cm",
+      "file": "kolye-oval-foto-gumus-xl.png",
+      "placement": { "centerX": 279, "centerY": 563, "width": 321, "height": 430 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "kare-foto-rose-xl": {
+      "shape": "kare",
+      "size": "XL",
+      "label": "Fotoğraf Kare - Rose",
+      "measure": "1,9 x 1,9 cm",
+      "file": "kare-foto-rose-xl.png",
+      "placement": { "centerX": 512, "centerY": 512, "width": 476, "height": 476 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 0.86,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "oval-foto-rose-xl": {
+      "shape": "oval",
+      "size": "XL",
+      "label": "Fotoğraf Oval - Rose",
+      "measure": "1,3 x 2,1 cm",
+      "file": "oval-foto-rose-xl.png",
+      "placement": { "centerX": 510, "centerY": 508, "width": 495, "height": 603 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "yuvarlak-foto-rose-xl": {
+      "shape": "yuvarlak",
+      "size": "XL",
+      "label": "Fotoğraf Yuvarlak - Rose",
+      "measure": "1,8 x 1,8 cm",
+      "file": "yuvarlak-foto-rose-xl.png",
+      "placement": { "centerX": 511, "centerY": 511, "width": 388, "height": 388 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "kolye-yuvarlak-foto-rose-xl": {
+      "shape": "yuvarlak",
+      "size": "XL",
+      "label": "Kolye Fotoğraf Yuvarlak - Rose",
+      "measure": "2 x 2 cm",
+      "file": "kolye-yuvarlak-foto-rose-xl.png",
+      "placement": { "centerX": 278, "centerY": 551, "width": 410, "height": 410 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "kolye-kare-foto-rose-xl": {
+      "shape": "kare",
+      "size": "XL",
+      "label": "Kolye Fotoğraf Kare - Rose",
+      "measure": "2 x 2 cm",
+      "file": "kolye-kare-foto-rose-xl.png",
+      "placement": { "centerX": 279, "centerY": 551, "width": 410, "height": 410 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "kolye-dikdortgen-foto-rose-xl": {
+      "shape": "dikdortgen",
+      "size": "XL",
+      "label": "Kolye Fotoğraf Dikdörtgen - Rose",
+      "measure": "2 x 2,8 cm",
+      "file": "kolye-dikdortgen-foto-rose-xl.png",
+      "placement": { "centerX": 279, "centerY": 582, "width": 355, "height": 482 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    },
+    "kolye-oval-foto-rose-xl": {
+      "shape": "oval",
+      "size": "XL",
+      "label": "Kolye Fotoğraf Oval - Rose",
+      "measure": "1,7 x 2,3 cm",
+      "file": "kolye-oval-foto-rose-xl.png",
+      "placement": { "centerX": 279, "centerY": 563, "width": 321, "height": 430 },
+      "engraving": {
+        "blend": "multiply",
+        "lineColor": "#15191d",
+        "opacity": 0.62,
+        "rotation": 0,
+        "scale": 1.0,
+        "shadow": { "opacity": 0.14, "blur": 0.55, "offsetX": 1, "offsetY": 1 },
+        "highlight": { "opacity": 0.16, "blur": 0.2, "offsetX": -1, "offsetY": -1 },
+        "mask": { "threshold": 202, "gain": 2.75, "gamma": 0.95, "blur": 0.1 }
+      }
+    }
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "rewrites": [
+    {
+      "source": "/api/health",
+      "destination": "/api/config?diag=health"
+    },
+    {
+      "source": "/api/version",
+      "destination": "/api/config?diag=version"
+    },
+    {
+      "source": "/api/profile",
+      "destination": "/api/config?resource=profile"
+    },
+    {
+      "source": "/api/credits",
+      "destination": "/api/config?resource=credits"
+    },
+    {
+      "source": "/api/subscription",
+      "destination": "/api/config?resource=subscription"
+    },
+    {
+      "source": "/api/topup/checkout",
+      "destination": "/api/iyzico/topup-checkout"
+    },
+    {
+      "source": "/api/generation-status",
+      "destination": "/api/generation/status"
+    },
+    {
+      "source": "/api/generation-delivered",
+      "destination": "/api/generation/delivered"
+    },
+    {
+      "source": "/api/recover-generations",
+      "destination": "/api/generation/recover"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Pragma",
+          "value": "no-cache"
+        },
+        {
+          "key": "Expires",
+          "value": "0"
+        },
+        {
+          "key": "Surrogate-Control",
+          "value": "no-store"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://esm.sh; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https: wss:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "api/finish.js": {
+      "maxDuration": 60
+    },
+    "api/mockup.js": {
+      "maxDuration": 60
+    },
+    "api/generation/*.js": {
+      "maxDuration": 60
+    },
+    "api/sketch.js": {
+      "maxDuration": 60
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/designs?task=cleanup",
+      "schedule": "0 3 * * *"
+    }
+  ]
+}

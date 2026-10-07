@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Cache-Control" content="no-store, max-age=0, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Atelify Ödeme</title>
+    <meta
+      name="description"
+      content="Atelify abonelik ödemesi: seçtiğin paketi onayla ve aylık kredilerini başlat."
+    />
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=20260526-fresh-state" />
+    <link rel="stylesheet" href="./styles.css?v=20260613-flat-layout" />
+    <script src="./script.js?v=20260526-fresh-state" defer></script>
+    <script src="./odeme.js?v=20260622-checkout" defer></script>
+    <script src="./header-auth.js?v=20260624-local-supabase" defer></script>
+  </head>
+  <body class="login-body">
+    <div class="portfolio-banner" role="note">
+      <strong>Portföy projesi</strong>
+      <span>Ödemeler test modundadır; gerçek tahsilat yapılmaz.</span>
+    </div>
+    <div class="page-shell">
+      <header class="site-header login-header">
+        <a class="brand" href="./index.html#top" aria-label="Atelify ana sayfaya dön">
+          <span class="brand-mark">Atelify</span>
+        </a>
+
+        <div class="header-actions">
+          <a class="ghost-link" href="./paketler.html">Paketlere Dön</a>
+          <a class="button button-secondary" href="./studio">Atelify'ı Aç</a>
+        </div>
+      </header>
+
+      <main class="login-main">
+        <section class="login-shell section">
+          <section class="login-panel reveal" aria-label="Ödeme özeti">
+            <div class="login-panel-head">
+              <h2 data-checkout-heading>Ödeme hazırlanıyor…</h2>
+              <p data-checkout-body hidden></p>
+            </div>
+
+            <div data-checkout-loading>
+            </div>
+
+            <div data-checkout-content hidden>
+              <div class="plan-card plan-card-featured" data-checkout-plan-card>
+                <div class="package-card-head">
+                  <p class="plan-name" data-plan-name>—</p>
+                  <span class="plan-badge">Aylık abonelik</span>
+                </div>
+                <div class="plan-price">
+                  <span data-plan-price>—</span>
+                  <small data-plan-sub>—</small>
+                </div>
+                <p data-plan-desc></p>
+              </div>
+
+              <p class="checkout-account" data-checkout-account></p>
+
+              <p class="auth-message" data-tone="info" data-checkout-status hidden></p>
+
+              <div class="simple-actions">
+                <button type="button" class="button button-primary" data-checkout-pay>
+                  Ödemeye geç
+                </button>
+                <a class="button button-secondary" href="./studio" data-checkout-studio hidden>
+                  Atelify'ı aç
+                </a>
+                <a class="ghost-link" href="./paketler.html">Paketlere dön</a>
+              </div>
+            </div>
+          </section>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="home-footer-bottom">
+          <span>Atelify</span>
+          <small>© 2026 Atelify. Tüm hakları saklıdır.</small>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
