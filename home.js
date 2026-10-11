@@ -41,3 +41,50 @@
   window.addEventListener("resize", update);
   update();
 })();
+
+// Tanıtım videosu: bölüme gelince sessiz başlar, bölümden çıkınca duraklar.
+// Kullanıcı videoyu kendisi durdurduysa geri gelince yeniden başlatılmaz.
+// "Hareketi azalt" tercihi açıksa otomatik oynatma yapılmaz.
+(function initFilmAutoplay() {
+  const video = document.querySelector("[data-autoplay-in-view]");
+  if (!video || !("IntersectionObserver" in window)) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  let pausedByUser = false;
+  let pausingProgrammatically = false;
+  let autoStarted = false;
+
+  video.addEventListener("pause", () => {
+    if (pausingProgrammatically) {
+      pausingProgrammatically = false;
+      return;
+    }
+    // Video bitince de "pause" gelir; o durumda kullanıcı durdurmuş sayılmaz.
+    if (!video.ended) pausedByUser = true;
+  });
+  video.addEventListener("play", () => {
+    pausedByUser = false;
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (pausedByUser || !video.paused || video.ended) return;
+          // İlk başlatma sessiz olmalı (tarayıcılar yalnızca sessiz videonun kendiliğinden
+          // başlamasına izin verir). Sonradan kullanıcı sesi açtıysa ona dokunma.
+          if (!autoStarted) video.muted = true;
+          autoStarted = true;
+          video.play().catch(() => {
+            // Tarayıcı izin vermezse kullanıcı oynat düğmesiyle başlatabilir.
+          });
+        } else if (!video.paused) {
+          pausingProgrammatically = true;
+          video.pause();
+        }
+      });
+    },
+    { threshold: 0.5 }
+  );
+  observer.observe(video);
+})();
