@@ -7,7 +7,6 @@ const sessionEmail = document.querySelector("[data-session-email]");
 const submitButton = document.querySelector("[data-submit-button]");
 const signUpButton = document.querySelector("[data-sign-up-button]");
 const resetPasswordButton = document.querySelector("[data-reset-password]");
-const authResetButton = document.querySelector("[data-auth-reset]");
 const signOutButton = document.querySelector("[data-sign-out]");
 const authHeading = document.querySelector("[data-auth-heading]");
 const authBody = document.querySelector("[data-auth-body]");
@@ -22,6 +21,7 @@ let authPublicConfig = null;
 const defaultSubmitLabel = submitButton?.textContent?.trim() || "Atelify'a Gir";
 const defaultSignUpLabel = signUpButton?.textContent?.trim() || "Üye ol";
 const AUTH_TIMEOUT_MS = 20000;
+const MIN_PASSWORD_LENGTH = 8;
 const AUTH_HANDOFF_STORAGE_KEY = "ff-auth-handoff-v1";
 const SUPABASE_LOCAL_SCRIPT_URL = "./assets/vendor/supabase.js?v=2.105.3";
 const SUPABASE_MODULE_URL = "https://esm.sh/@supabase/supabase-js@2.105.3";
@@ -41,6 +41,7 @@ let currentMode = "sign-in";
 let supabasePromise = null;
 let isClearingInvalidSession = false;
 let isCredentialSignInInFlight = false;
+let isPasswordRecoveryActive = false;
 
 function withTimeout(promise, timeoutMs, message) {
   let timeoutId = 0;
@@ -150,7 +151,7 @@ const AUTH_ERROR_TRANSLATIONS = [
   [/invalid login credentials/i, "E-posta veya şifre hatalı."],
   [/email not confirmed/i, "E-posta adresin henüz doğrulanmadı. Gelen kutunu kontrol et."],
   [/user already registered/i, "Bu e-posta ile zaten bir üyelik var."],
-  [/password should be at least/i, "Şifre en az 6 karakter olmalı."],
+  [/password should be at least/i, `Şifre en az ${MIN_PASSWORD_LENGTH} karakter olmalı.`],
   [/(rate limit|too many requests|you can only request this after)/i, "Çok sık deneme yapıldı. Biraz bekleyip tekrar dene."],
   [/(invalid format|unable to validate email)/i, "Geçerli bir e-posta adresi gir."],
   [/new password should be different/i, "Yeni şifre eskisinden farklı olmalı."],
@@ -308,13 +309,22 @@ function looksLikeExistingUserResponse(data) {
   );
 }
 
-function buildAuthRedirectUrl() {
+// E-posta linklerinin döneceği adres. PKCE akışında hem üyelik doğrulama hem
+// şifre sıfırlama linki ?code= ile gelir; ikisini ayırabilmek için linklere
+// kendi "mode" işaretimizi ekliyoruz. Adres her zaman en az bir sorgu parametresi
+// taşır; Supabase mail şablonları sonuna "&token_hash=..." ekleyebilsin diye.
+function buildAuthRedirectUrl(params = {}) {
   const baseUrl = authPublicConfig?.siteUrl || window.location.href;
+  let url;
   try {
-    return new URL("./login", baseUrl).toString();
+    url = new URL("./login", baseUrl);
   } catch {
-    return new URL("./login", window.location.href).toString();
+    url = new URL("./login", window.location.href);
   }
+  Object.entries(params).forEach(([key, value]) => {
+    if (value) url.searchParams.set(key, value);
+  });
+  return url.toString();
 }
 
 function readAuthCallbackParams() {
@@ -333,18 +343,61 @@ function readAuthCallbackParams() {
   }
 }
 
+// Mail şablonu {{ .TokenHash }} ile link üretiyorsa doğrulama, linkin açıldığı
+// cihazdan bağımsız çalışır. ?code= (PKCE) ise sadece üyeliğin/sıfırlamanın
+// istendiği tarayıcıda çalışır; o yol da geriye dönük olarak destekleniyor.
+const TOKEN_HASH_TYPES = new Set(["email", "signup", "recovery", "invite", "magiclink", "email_change"]);
+
+function readTokenHashCallback() {
+  const { searchParams } = readAuthCallbackParams();
+  const tokenHash = searchParams.get("token_hash");
+  const type = searchParams.get("type");
+  if (!tokenHash || !TOKEN_HASH_TYPES.has(type)) return null;
+  return { tokenHash, type };
+}
+
+async function verifyTokenHashCallback(supabase, { tokenHash, type }) {
+  if (type === "recovery") isPasswordRecoveryActive = true;
+
+  let error;
+  try {
+    ({ error } = await withTimeout(
+      supabase.auth.verifyOtp({ token_hash: tokenHash, type }),
+      AUTH_TIMEOUT_MS,
+      "Bağlantı doğrulanamadı."
+    ));
+  } catch (requestError) {
+    error = requestError;
+  }
+
+  if (!error) return;
+
+  isPasswordRecoveryActive = false;
+  cleanAuthCallbackUrl();
+  setMessage(
+    "error",
+    type === "recovery"
+      ? "Bu şifre sıfırlama bağlantısı geçersiz ya da süresi dolmuş. E-postanı yazıp yeniden \"Şifremi unuttum\"a bas."
+      : "Bu doğrulama bağlantısı geçersiz ya da süresi dolmuş. Giriş yapmayı dene; gerekirse yeni bağlantı gönderebilirsin."
+  );
+}
+
 function isPasswordRecoveryCallbackUrl() {
   const { hashParams, searchParams } = readAuthCallbackParams();
   return (
+    searchParams.get("mode") === "recovery" ||
     searchParams.get("type") === "recovery" ||
-    hashParams.get("type") === "recovery" ||
-    searchParams.has("code")
+    hashParams.get("type") === "recovery"
   );
 }
 
 function cleanAuthCallbackUrl() {
   try {
-    window.history.replaceState(null, "", new URL("./login", window.location.href).toString());
+    // Callback parametrelerini sil ama ?next= kalsın; şifre güncellenince oraya dönülür.
+    const next = requestedNextTarget();
+    const url = new URL("./login", window.location.href);
+    if (next) url.searchParams.set("next", next);
+    window.history.replaceState(null, "", url.toString());
   } catch {
     // URL temizliği desteklenmezse akış yine çalışır; sadece callback parametresi kalır.
   }
@@ -353,7 +406,7 @@ function cleanAuthCallbackUrl() {
 // Giriş sonrası nereye dönüleceği: varsayılan ./studio, ama login'e ?next= ile
 // gelinmişse (örn. paket seçip ödeme ekranına gidilecekse) oraya döndürürüz.
 // Güvenlik: sadece bilinen iç hedeflere izin ver; protokol/host/.. kabul etme.
-function postLoginTarget() {
+function requestedNextTarget() {
   let raw = "";
   try {
     raw = new URLSearchParams(window.location.search).get("next") || "";
@@ -361,7 +414,7 @@ function postLoginTarget() {
     raw = "";
   }
   raw = String(raw).trim();
-  if (!raw) return "./studio";
+  if (!raw) return "";
 
   let decoded = raw;
   try {
@@ -373,7 +426,11 @@ function postLoginTarget() {
   if (/^(?:\.\/)?(odeme\.html|studio)(?:\?[A-Za-z0-9=&%._-]*)?$/.test(decoded)) {
     return decoded.startsWith("./") ? decoded : `./${decoded}`;
   }
-  return "./studio";
+  return "";
+}
+
+function postLoginTarget() {
+  return requestedNextTarget() || "./studio";
 }
 
 function showPasswordRecovery(session) {
@@ -427,6 +484,9 @@ async function createSupabaseClient() {
 
   supabase.auth.onAuthStateChange((event, nextSession) => {
     if (event === "PASSWORD_RECOVERY") {
+      // Supabase sıfırlama linkini kendi de tanır; URL işaretimiz kaybolsa bile
+      // bu bayrak kullanıcının stüdyoya yönlendirilmesini engeller.
+      isPasswordRecoveryActive = true;
       showPasswordRecovery(nextSession);
       return;
     }
@@ -452,6 +512,11 @@ async function createSupabaseClient() {
     }
   });
 
+  const tokenHashCallback = readTokenHashCallback();
+  if (tokenHashCallback) {
+    await verifyTokenHashCallback(supabase, tokenHashCallback);
+  }
+
   const {
     data: { session },
   } = await withTimeout(
@@ -462,12 +527,12 @@ async function createSupabaseClient() {
 
   const verifiedSession = session ? await verifySessionOrClear(supabase, session) : null;
 
-  if (verifiedSession && isRecoveryUrl) {
+  if (verifiedSession && (isRecoveryUrl || isPasswordRecoveryActive)) {
     showPasswordRecovery(verifiedSession);
     return supabase;
   }
 
-  if (verifiedSession && !isRecoveryUrl) {
+  if (verifiedSession) {
     window.location.href = postLoginTarget();
     return supabase;
   }
@@ -502,7 +567,7 @@ async function verifySessionOrClear(supabase, session) {
 
 async function redirectAfterVerifiedSession(supabase, session) {
   const verifiedSession = await verifySessionOrClear(supabase, session);
-  if (!verifiedSession) return;
+  if (!verifiedSession || isPasswordRecoveryActive) return;
   writeAuthHandoff(verifiedSession);
   window.location.replace(postLoginTarget());
 }
@@ -581,6 +646,11 @@ async function handleSignIn() {
 
     if (error) {
       setMessage("error", error.message);
+      // Doğrulanmamış hesap: tekrar gönder butonunu burada da göster, yoksa
+      // üyelikten sonra sayfayı kapatan kullanıcı takılı kalıyor.
+      if (/email not confirmed/i.test(error.message || "")) {
+        showVerificationResend(email);
+      }
       return;
     }
 
@@ -619,8 +689,8 @@ async function handleSignUp() {
     return;
   }
 
-  if (password.length < 6) {
-    setMessage("error", "Şifre en az 6 karakter olmalı.");
+  if (password.length < MIN_PASSWORD_LENGTH) {
+    setMessage("error", `Şifre en az ${MIN_PASSWORD_LENGTH} karakter olmalı.`);
     return;
   }
 
@@ -639,7 +709,7 @@ async function handleSignUp() {
         email,
         password,
         options: {
-          emailRedirectTo: buildAuthRedirectUrl(),
+          emailRedirectTo: buildAuthRedirectUrl({ mode: "signup", next: requestedNextTarget() }),
         },
       }),
       AUTH_TIMEOUT_MS,
@@ -664,7 +734,7 @@ async function handleSignUp() {
     if (data.session) {
       writeAuthHandoff(data.session);
       signUpForm.reset();
-      window.location.replace("./studio");
+      window.location.replace(postLoginTarget());
       return;
     }
 
@@ -698,6 +768,8 @@ async function handleResetPassword() {
     return;
   }
 
+  if (resetPasswordButton?.disabled) return;
+  resetPasswordButton.disabled = true;
   setMessage("", "");
 
   let error;
@@ -705,7 +777,7 @@ async function handleResetPassword() {
     const supabase = await requireSupabase();
     ({ error } = await withTimeout(
       supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: buildAuthRedirectUrl(),
+        redirectTo: buildAuthRedirectUrl({ mode: "recovery", next: requestedNextTarget() }),
       }),
       AUTH_TIMEOUT_MS,
       "Şifre sıfırlama isteği tamamlanamadı."
@@ -713,6 +785,8 @@ async function handleResetPassword() {
   } catch (requestError) {
     setMessage("error", requestError?.message || "Şifre sıfırlama isteği gönderilemedi.");
     return;
+  } finally {
+    resetPasswordButton.disabled = false;
   }
 
   if (error) {
@@ -749,7 +823,7 @@ async function handleResendVerification() {
       supabase.auth.resend({
         type: "signup",
         email,
-        options: { emailRedirectTo: buildAuthRedirectUrl() },
+        options: { emailRedirectTo: buildAuthRedirectUrl({ mode: "signup", next: requestedNextTarget() }) },
       }),
       AUTH_TIMEOUT_MS,
       "Doğrulama e-postası isteği tamamlanamadı."
@@ -774,8 +848,8 @@ async function handleRecoverySubmit() {
   const newPassword = getFieldValue(recoveryForm, "newPassword");
   const confirmPassword = getFieldValue(recoveryForm, "confirmPassword");
 
-  if (!newPassword || newPassword.length < 6) {
-    setMessage("error", "Yeni şifre en az 6 karakter olmalı.");
+  if (!newPassword || newPassword.length < MIN_PASSWORD_LENGTH) {
+    setMessage("error", `Yeni şifre en az ${MIN_PASSWORD_LENGTH} karakter olmalı.`);
     return;
   }
 
@@ -808,24 +882,27 @@ async function handleRecoverySubmit() {
   }
 
   recoveryForm.reset();
-  setMode("sign-in");
+  isPasswordRecoveryActive = false;
 
   let session;
   try {
-    const {
-      data: { session: activeSession },
-    } = await withTimeout(
-      supabase.auth.getSession(),
-      AUTH_TIMEOUT_MS,
-      "Güncel oturum okunamadı."
-    );
-    session = activeSession;
-  } catch (requestError) {
-    setMessage("warning", requestError?.message || "Şifre güncellendi ama oturum yenilenemedi.");
+    session = await readActiveSession(supabase);
+  } catch {
+    session = null;
+  }
+
+  // Sıfırlama linki kullanıcıyı zaten oturum açmış hâle getirir; "giriş yap"
+  // deyip aynı anda "Oturum Açık" kartı göstermek yerine doğrudan devam ettir.
+  if (session?.user) {
+    writeAuthHandoff(session);
+    renderSession(null, false);
+    setMessage("success", "Şifren güncellendi. Yönlendiriliyorsun...");
+    window.setTimeout(() => window.location.replace(postLoginTarget()), 1200);
     return;
   }
 
-  renderSession(session, false);
+  setMode("sign-in");
+  renderSession(null, false);
   setMessage("success", "Şifre güncellendi. Yeni şifrenle giriş yapabilirsin.");
 }
 
@@ -870,10 +947,6 @@ function bindUi() {
 
   resetPasswordButton?.addEventListener("click", async () => {
     await handleResetPassword();
-  });
-
-  authResetButton?.addEventListener("click", async () => {
-    await resetLocalAuthState();
   });
 
   recoveryForm?.addEventListener("submit", async (event) => {

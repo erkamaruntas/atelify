@@ -1,6 +1,6 @@
 // header-auth.js — Girişli kullanıcıya header'da "Çıkış" bağlantısı gösterir.
-// Marketing/checkout sayfalarında (index, paketler, nasil-calisir, odeme, login)
-// yüklenir. Oturum yoksa hiçbir şey yapmaz; header olduğu gibi kalır. Studio dışında
+// Marketing/checkout sayfalarında (index, paketler, nasil-calisir, odeme)
+// yüklenir. Login sayfasında yüklenmez; orada oturumu login-auth.js yönetir. Oturum yoksa hiçbir şey yapmaz; header olduğu gibi kalır. Studio dışında
 // da çıkış yapılabilsin diye eklendi.
 //
 // Kendi IIFE'sinde çalışır; script.js / odeme.js ile global çakışması olmaz.
@@ -66,7 +66,9 @@
     return supabaseModule.createClient(config.supabaseUrl, config.supabasePublishableKey, {
       auth: {
         autoRefreshToken: true,
-        detectSessionInUrl: true,
+        // E-posta linklerindeki tek kullanımlık ?code= değerini sadece login-auth.js
+        // kullanır; burada da okunursa iki istemci yarışır ve biri hata alır.
+        detectSessionInUrl: false,
         flowType: "pkce",
         persistSession: true,
       },

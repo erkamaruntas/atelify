@@ -360,9 +360,17 @@ if (stage) {
     </div>
   `;
 
+  // Bant sabit konumlu; açıkken sayfanın altına bant kadar boşluk bırak ki
+  // alt kısımdaki butonlar (ör. login'deki "Atelify'a Gir") altında kalmasın.
+  function syncBodyOffset() {
+    document.body.style.setProperty("--cookie-consent-offset", `${banner.offsetHeight}px`);
+  }
+
   function close(choice) {
     storeConsent(choice);
     banner.classList.remove("is-visible");
+    document.body.classList.remove("has-cookie-consent");
+    window.removeEventListener("resize", syncBodyOffset);
     window.setTimeout(() => banner.remove(), 320);
   }
 
@@ -373,5 +381,8 @@ if (stage) {
   });
 
   document.body.appendChild(banner);
+  syncBodyOffset();
+  document.body.classList.add("has-cookie-consent");
+  window.addEventListener("resize", syncBodyOffset);
   window.requestAnimationFrame(() => banner.classList.add("is-visible"));
 })();

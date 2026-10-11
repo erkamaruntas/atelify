@@ -30,10 +30,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./assets/brand/favicon-32.png?v=20261008-hammer2" />
     <link rel="icon" type="image/png" sizes="192x192" href="./assets/brand/favicon-192.png?v=20261008-hammer2" />
     <link rel="apple-touch-icon" href="./assets/brand/apple-touch-icon.png?v=20261008-hammer2" />
-    <link rel="stylesheet" href="./styles.css?v=20260613-flat-layout" />
-    <script src="./script.js?v=20260526-fresh-state" defer></script>
-    <script src="./login-auth.js?v=20260624-local-supabase" defer></script>
-    <script src="./header-auth.js?v=20260624-local-supabase" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20261011-cookie-offset" />
+    <script src="./script.js?v=20261011-cookie-offset" defer></script>
+    <script src="./login-auth.js?v=20261011-auth-fixes" defer></script>
   </head>
   <body class="login-body">
     <div class="portfolio-banner" role="note">
@@ -105,9 +104,6 @@
 
               <div class="login-row">
                 <div class="login-row-actions">
-                  <button class="ghost-button" type="button" data-auth-reset>
-                    Oturumu sıfırla
-                  </button>
                   <button class="ghost-button" type="button" data-reset-password>
                     Şifremi unuttum
                   </button>
@@ -137,8 +133,8 @@
                   type="password"
                   name="password"
                   autocomplete="new-password"
-                  placeholder="En az 6 karakter"
-                  minlength="6"
+                  placeholder="En az 8 karakter"
+                  minlength="8"
                   required
                 />
               </label>
@@ -150,7 +146,7 @@
                   name="confirmPassword"
                   autocomplete="new-password"
                   placeholder="Şifreyi tekrar yaz"
-                  minlength="6"
+                  minlength="8"
                   required
                 />
               </label>
@@ -177,7 +173,7 @@
                   name="newPassword"
                   autocomplete="new-password"
                   placeholder="Yeni şifrenizi yazın"
-                  minlength="6"
+                  minlength="8"
                   required
                 />
               </label>
@@ -189,7 +185,7 @@
                   name="confirmPassword"
                   autocomplete="new-password"
                   placeholder="Şifreyi tekrar edin"
-                  minlength="6"
+                  minlength="8"
                   required
                 />
               </label>

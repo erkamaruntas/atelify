@@ -3651,6 +3651,10 @@ a {
   transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s ease;
 }
 
+body.has-cookie-consent {
+  padding-bottom: calc(var(--cookie-consent-offset, 0px) + clamp(12px, 3vw, 28px) + 12px);
+}
+
 .cookie-consent.is-visible {
   opacity: 1;
   visibility: visible;
