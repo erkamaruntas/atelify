@@ -170,7 +170,7 @@ function enterVisualizationStage(stage, options = {}) {
   applyStageRestrictions();
   if (!finishInfo) {
     setMockupStatusMessage(
-      `${isManken ? "Manken" : "Mockup"} için ürün fotoğrafı yükle veya Görsel Üretimi aşamasından seçim yap.`,
+      `${isManken ? "Manken" : "Mockup"} için ürün fotoğrafı yükle veya Ürün görseli aşamasından seçim yap.`,
       "warning"
     );
   } else {

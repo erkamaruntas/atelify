@@ -767,8 +767,8 @@
 
   function sourceLabel(design) {
     if (design.sourceFileName) return design.sourceFileName;
-    if (design.sourceStage === "sketch") return "Ürün / Tasarım";
-    if (design.sourceStage === "finish") return "Görsel Üretimi";
+    if (design.sourceStage === "sketch") return "Taslak";
+    if (design.sourceStage === "finish") return "Ürün görseli";
     if (design.sourceStage === "mockup") return "Mockup / Manken";
     return "Atelify üretimi";
   }

@@ -627,7 +627,7 @@ function maybeEnableDevMode() {
     banner.innerHTML =
       "<span>Test modu aktif — gerçek üretim çağrısı yapılmaz, başarılı denemede kredi düşer.</span>" +
       '<button type="button" class="button button-primary button-sm" data-dev-jump>' +
-      "Görsel üretimine atla</button>";
+      "Ürün görseline atla</button>";
     newDesignStudio.prepend(banner);
     banner.querySelector("[data-dev-jump]")?.addEventListener("click", devJumpToFinishStage);
   }

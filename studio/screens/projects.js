@@ -1,10 +1,10 @@
 (function () {
   const STAGE_LABELS = {
-    finish: "2. Görsel Üretimi",
-    form: "2. Görsel Üretimi",
+    finish: "2. Ürün görseli",
+    form: "2. Ürün görseli",
     mockup: "3. Vitrin / Mockup",
     manken: "4. Manken",
-    sketch: "1. Ürün / Tasarım",
+    sketch: "1. Taslak",
   };
 
   function isMankenResult(item) {

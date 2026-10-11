@@ -114,7 +114,7 @@ const RESULT_LOADING_CONFIG = {
     loadingText: "Ürün görseli hazırlanıyor",
     resultClass: "has-finish-result",
     resultSelector: "[data-finish-result-card]",
-    stageLabel: "Görsel Üretimi",
+    stageLabel: "Ürün görseli",
   },
   mockup: {
     gridSelector: "[data-mockup-result-grid]",
@@ -128,7 +128,7 @@ const RESULT_LOADING_CONFIG = {
     loadingText: "Tasarım görseli hazırlanıyor",
     resultClass: "has-results",
     resultSelector: "[data-sketch-card]",
-    stageLabel: "Ürün / Tasarım",
+    stageLabel: "Taslak",
   },
 };
 

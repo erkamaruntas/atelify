@@ -18,7 +18,7 @@ function getSelectedFormInfo() {
     renderMode: "generated",
     sketchUrl: sourceUrl,
     sourceSketchUrl: sourceUrl,
-    subtitle: "Ürün / Tasarım",
+    subtitle: "Taslak",
     title: sketch.label || "Seçili tasarım",
   });
 }
@@ -37,7 +37,7 @@ function enterFinishStage(options = {}) {
   const allowMissing = options.allowMissing === true;
   const formInfo = getSelectedFormInfo();
   if (!formInfo && !allowMissing) {
-    setFinishStatusMessage("Görsel Üretimi aşaması için önce bir tasarım seç.", "error");
+    setFinishStatusMessage("Ürün görseli aşaması için önce bir tasarım seç.", "error");
     return;
   }
 
@@ -63,7 +63,7 @@ function enterFinishStage(options = {}) {
   setMockupStepReady(Boolean(getSelectedFinishInfo()));
   if (!formInfo) {
     setFinishStatusMessage(
-      "Görsel Üretimi için 1. aşama sonuçlarından birini seç veya temiz siyah-beyaz tasarım yükle.",
+      "Ürün görseli için 1. aşama sonuçlarından birini seç veya temiz siyah-beyaz tasarım yükle.",
       "warning"
     );
   } else {

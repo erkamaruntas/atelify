@@ -100,9 +100,14 @@ function openProject(projectId, options = {}) {
   activeProjectId = project.id;
   studioStore.writeActiveProjectId(project.id);
 
+  // Dar ekranda çalışma alanı proje listesinin altında açılır. Kullanıcı
+  // tıkladığında (otomatik geri yüklemelerde değil; onlar scroll: false geçer)
+  // en üste kaydırmak yerine doğrudan çalışma alanına gidilir.
+  const revealWorkspace = options.scroll !== false && window.matchMedia("(max-width: 760px)").matches;
+
   switchTab("projeler", {
     skipProjectSave: true,
-    scroll: options.scroll,
+    scroll: revealWorkspace ? false : options.scroll,
     showProjectLibrary: false,
     updateHash: options.updateHash,
   });
@@ -111,6 +116,11 @@ function openProject(projectId, options = {}) {
   restoreProjectState(project);
   syncVisiblePendingGenerations({ resume: true });
   updateActiveProjectHeader(project);
+
+  if (revealWorkspace) {
+    const workspace = document.querySelector("[data-project-workspace]");
+    window.requestAnimationFrame(() => workspace?.scrollIntoView({ block: "start", behavior: "smooth" }));
+  }
 }
 
 function renameProject(projectId) {

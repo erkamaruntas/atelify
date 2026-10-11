@@ -18,6 +18,14 @@ body.studio-body::before {
   display: none;
 }
 
+/* styles.css hem html'e hem body'ye overflow-x: hidden verir; ikisi birlikte
+   body'yi ayrı bir kaydırma kutusu yapar ve position: sticky öğeleri ekrana
+   değil body'ye göre konumlanıp hiç yapışmaz. clip aynı yatay taşma korumasını
+   kaydırma kutusu oluşturmadan sağlar. */
+body.studio-body {
+  overflow-x: clip;
+}
+
 .studio-body h1,
 .studio-body h2 {
   font-family: var(--serif);
@@ -442,10 +450,18 @@ body.studio-body::before {
 /* Dar panellerdeki eylem satırları: büyük harfli butonlar iki satıra kırılmasın */
 .studio-body .design-actions .button,
 .studio-body .cost-row .button {
-  padding: 0 14px;
-  font-size: 11px;
-  letter-spacing: 0.05em;
+  min-width: 0;
+  padding: 0 12px;
+  font-size: 13px;
+  letter-spacing: 0;
+  text-transform: none;
   white-space: nowrap;
+}
+
+.studio-body .design-workspace > .design-panel:not(.results-panel) .design-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
 }
 
 /* ---------- telefon: proje listesi üstte, çalışma alanı altta ----------
@@ -470,6 +486,55 @@ body.studio-body::before {
     width: 100%;
   }
 
+  /* masaüstünde yapışık kenar çubuğu; telefonda akışta kalsın */
+  .studio-body .projects-layout > .project-library {
+    position: static;
+    overflow: visible;
+    max-height: none;
+  }
+
+  /* test/senkron bandı: buton alta insin */
+  .studio-body .studio-notice {
+    flex-wrap: wrap;
+  }
+
+  .studio-body .studio-notice--dev .button {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  /* dört aşama tek satırda, kompakt */
+  .studio-body .workflow-steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .studio-body .workflow-step {
+    min-height: 0;
+    padding: 10px 8px;
+  }
+
+  .studio-body .workflow-step .step-topline {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .studio-body .workflow-step h3 {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .studio-body .workflow-step.is-active::after {
+    display: none;
+  }
+
+  /* proje açılınca kaydırıldığında üst menünün altında kalmasın */
+  .studio-body [data-project-workspace] {
+    scroll-margin-top: calc(var(--studio-header-height, 72px) + 8px);
+  }
+
   .studio-body .projects-layout > .project-library-rail,
   .studio-body .project-library-collapse {
     display: none;
@@ -487,4 +552,249 @@ body.studio-body::before {
   .studio-body .studio-tabs::-webkit-scrollbar {
     display: none;
   }
+}
+
+/* ---------- proje alanı: karşılama / seçim ----------
+   Soldaki "Henüz proje yok" kutusu görünürse karşılama, değilse seçim mesajı. */
+.studio-body .project-workspace-placeholder .placeholder-onboarding {
+  display: none;
+}
+
+.studio-body .projects-layout:has([data-project-empty]:not([hidden])) .placeholder-onboarding {
+  display: block;
+}
+
+.studio-body .projects-layout:has([data-project-empty]:not([hidden])) .placeholder-select {
+  display: none;
+}
+
+.studio-body .project-workspace-placeholder h2 {
+  font-size: clamp(40px, 4.4vw, 64px);
+  line-height: 1.02;
+}
+
+.studio-body .project-workspace-placeholder h2 em {
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+.studio-body .project-workspace-placeholder .placeholder-lead {
+  max-width: 52ch;
+  margin: 18px 0 28px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.studio-body .onboarding-steps {
+  display: grid;
+  max-width: 720px;
+  margin: 0 0 32px;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.studio-body .onboarding-steps li {
+  display: grid;
+  grid-template-columns: 40px 140px 1fr auto;
+  gap: 16px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 14px;
+}
+
+.studio-body .onboarding-steps .step-index {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--gold);
+}
+
+.studio-body .onboarding-steps strong {
+  font-weight: 500;
+}
+
+.studio-body .onboarding-steps span:not(.step-index) {
+  color: var(--ink-soft);
+}
+
+.studio-body .onboarding-steps em {
+  font-style: normal;
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .studio-body .onboarding-steps li {
+    grid-template-columns: 32px 1fr auto;
+  }
+
+  .studio-body .onboarding-steps span:not(.step-index) {
+    grid-column: 2 / -1;
+  }
+}
+
+/* ---------- aşama panelleri: "oluştur" butonları hep görünür ----------
+   Sol panel uzun olduğunda butonlar ekranın altına yapışır. */
+@media (min-width: 761px) {
+  .studio-body .design-workspace > .design-panel:not(.results-panel) .design-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 3;
+    margin-inline: -18px;
+    padding: 12px 18px;
+    border-top: 1px solid var(--line);
+    background: color-mix(in srgb, var(--surface-strong) 94%, transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* ---------- 1. aşama: sonraki adım ----------
+   Taslak sonuçları gelince "Ürün görseline geç" görünür. */
+.studio-body .sketch-next-actions {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.studio-body .results-panel:has(.sketch-thumb.has-image) .sketch-next-actions {
+  display: flex;
+}
+
+@media (min-width: 761px) {
+  .studio-body .sketch-next-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 3;
+    margin: 20px -18px 0;
+    padding: 12px 18px;
+    background: color-mix(in srgb, var(--surface-strong) 94%, transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+}
+
+.studio-body .sketch-next-hint {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+@media (max-width: 760px) {
+  .studio-body .sketch-next-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* Diğer aşamaların sonuç butonları da ("Mockup aşamasına geç", "Ürünü kaydet"…)
+   ekranın altında görünür kalsın. */
+@media (min-width: 761px) {
+  .studio-body .design-workspace > .results-panel .result-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 3;
+    margin-inline: -18px;
+    padding: 12px 18px;
+    border-top: 1px solid var(--line);
+    background: color-mix(in srgb, var(--surface-strong) 94%, transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* ---------- boş sonuç mesajları ----------
+   studio.css'teki ".has-results .result-empty { display: none }" kuralı, 1. aşamada
+   sonuç olunca diğer aşamaların "henüz görsel yok" mesajlarını da gizliyordu.
+   Gizleme yalnızca kendi aşamasının sonucu varken geçerli olsun. */
+.studio-body .new-design-studio.has-results [data-stage-panel]:not([data-stage-panel="sketch"]) .result-empty {
+  display: grid;
+}
+
+/* üstteki kuralla aynı özgüllükte ve ondan sonra: kendi sonucu varsa gizle */
+.studio-body .new-design-studio.has-finish-result [data-stage-panel]:not([data-stage-panel="sketch"]) .result-empty[data-finish-result-empty],
+.studio-body .new-design-studio.has-mockup-result [data-stage-panel]:not([data-stage-panel="sketch"]) .result-empty[data-mockup-result-empty] {
+  display: none;
+}
+
+/* ---------- form alanları: tek tip görünüm ----------
+   Destek, profil, sipariş ve tasarım formlarındaki metin alanları farklı
+   yerlerde farklı (bazıları hiç) stillenmişti. */
+.studio-body :is(.design-field, .profile-field, .production-field, .ticket-form, .ticket-reply) :is(
+  input[type="text"], input[type="email"], input[type="tel"], input[type="number"],
+  input[type="search"], input[type="password"], input:not([type]), select, textarea) {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+  box-shadow: none;
+}
+
+.studio-body :is(.design-field, .profile-field, .production-field, .ticket-form, .ticket-reply) textarea {
+  min-height: 112px;
+  padding: 12px 14px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.studio-body :is(.design-field, .profile-field, .production-field, .ticket-form, .ticket-reply) :is(input, select, textarea)::placeholder {
+  color: var(--muted);
+}
+
+.studio-body :is(.design-field, .profile-field, .production-field, .ticket-form, .ticket-reply) :is(input, select, textarea):focus {
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.studio-body .design-field label,
+.studio-body .profile-field label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ---------- destek ---------- */
+.studio-body .ticket-panel .panel-heading {
+  align-items: flex-end;
+  margin-bottom: 28px;
+}
+
+.studio-body .ticket-form {
+  margin: 0 0 28px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: var(--surface-strong);
+}
+
+.studio-body .ticket-empty {
+  padding: 40px 24px;
+  border: 1px dashed var(--line-strong);
+  text-align: center;
+}
+
+.studio-body .ticket-empty h3 {
+  margin-top: 8px;
+}
+
+/* form açıkken gizlenen "Yeni talep aç" yerinde boş çerçeve kalmasın */
+.studio-body [data-ticket-new][hidden] {
+  display: none !important;
+}
+
+/* boş durumlardaki yönlendirme butonu */
+.studio-body .empty-action {
+  margin-top: 18px;
 }

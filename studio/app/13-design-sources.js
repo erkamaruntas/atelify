@@ -70,7 +70,7 @@ async function handleDirectFinishUpload(event) {
     directMockupFinish = null;
     directMockupFinishFile = null;
     renderMockupPreview(null);
-    setMockupStatusMessage(`${result.message} Görsel Üretimi aşamasından yeni bir render seç veya daha temiz görsel yükle.`, "error");
+    setMockupStatusMessage(`${result.message} Ürün görseli aşamasından yeni bir render seç veya daha temiz görsel yükle.`, "error");
     setWorkflowForVisualizationStage();
     queueActiveProjectSave();
     return;

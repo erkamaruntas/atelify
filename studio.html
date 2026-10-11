@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="./system.css?v=a85808712b" />
     <link rel="stylesheet" href="./styles.css?v=bb7738075e" />
     <link rel="stylesheet" href="./studio.css?v=b0e31ac86d" />
-    <link rel="stylesheet" href="./studio-theme.css?v=c10d8bf5c1" />
+    <link rel="stylesheet" href="./studio-theme.css?v=a37bedf2a0" />
   </head>
   <body class="studio-body">
     <!-- Auth loading overlay -->
@@ -119,7 +119,7 @@
                 <path d="M17 9V5a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v4a2 2 0 0 1 0 4v4a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-4a2 2 0 0 1 0-4z"/>
                 <line x1="11" y1="4" x2="11" y2="16" stroke-dasharray="1 2"/>
               </svg>
-              Ticket
+              Destek
             </button>
 
             <button id="tab-profil" class="studio-tab" data-tab="profil" role="tab" aria-selected="false">
@@ -249,6 +249,9 @@
                   Projeler sekmesinden bir akış başlat; seçtiğin tasarım, ürün görseli
                   veya mockup görselleri bu alanda en son kayıtlar olarak listelenir.
                 </p>
+                <button class="button button-secondary empty-action" type="button" data-tab-trigger="projeler">
+                  Projelere git
+                </button>
               </div>
               <div class="designs-grid" data-overview-recent-grid hidden></div>
             </article>
@@ -334,15 +337,8 @@
                   <div class="project-empty-state" data-project-empty>
                     <div>
                       <p class="eyebrow">Henüz proje yok</p>
-                      <h3>İlk proje alanını oluştur.</h3>
-                      <p>
-                        1-2-3 tasarım akışı, proje oluşturduktan sonra açılır ve
-                        seçimlerin bu projeye kaydedilir.
-                      </p>
+                      <p>Başlattığın projeler burada listelenir.</p>
                     </div>
-                    <button class="button button-secondary" type="button" data-new-project>
-                      İlk projeyi başlat
-                    </button>
                   </div>
 
                   <div class="project-grid" data-project-grid></div>
@@ -365,14 +361,37 @@
               </div>
 
               <article class="section project-workspace-placeholder reveal" data-project-workspace-placeholder>
-                <p class="eyebrow">Proje alanı</p>
-                <h2>Soldan bir proje seç.</h2>
-                <p>
-                  Proje içi üretim adımları, görsel yükleme alanı ve sonuçlar seçtiğin projeyle birlikte burada açılır.
-                </p>
-                <button class="button button-primary" type="button" data-new-project>
-                  Yeni proje
-                </button>
+                <!-- Hiç proje yokken: karşılama. Proje varken: seçim mesajı.
+                     Hangisinin görüneceğine studio-theme.css karar verir
+                     (soldaki [data-project-empty] görünür mü?). -->
+                <div class="placeholder-onboarding">
+                  <p class="eyebrow">Hoş geldin</p>
+                  <h2>İlk projeni <em>başlat.</em></h2>
+                  <p class="placeholder-lead">
+                    Proje, ürün tipini, şeklini ve metalini bir kez seçtiğin çalışma alanıdır.
+                    Dört aşamayı da onun içinde, istediğin sırayla ilerletirsin.
+                  </p>
+                  <ol class="onboarding-steps">
+                    <li><span class="step-index">01</span><strong>Taslak</strong><span>Görselini yükle, kazımaya hazır gravür çizimini al.</span><em>1 kredi</em></li>
+                    <li><span class="step-index">02</span><strong>Ürün görseli</strong><span>Çizimi seçtiğin yüzük ya da kolye kalıbına yerleştir.</span><em>Ücretsiz</em></li>
+                    <li><span class="step-index">03</span><strong>Mockup</strong><span>Satışa hazır stüdyo ve sahne fotoğrafı üret.</span><em>5 kredi</em></li>
+                    <li><span class="step-index">04</span><strong>Manken</strong><span>Ürünü elde ya da boyunda gör.</span><em>6 kredi</em></li>
+                  </ol>
+                  <button class="button button-primary" type="button" data-new-project>
+                    Yeni proje başlat
+                  </button>
+                </div>
+                <div class="placeholder-select">
+                  <p class="eyebrow">Proje alanı</p>
+                  <h2>Soldan bir proje <em>seç.</em></h2>
+                  <p class="placeholder-lead">
+                    Seçtiğin projenin aşamaları, yüklediğin görsel ve sonuçlar burada açılır.
+                    Yeni bir tasarıma başlamak için yeni proje oluşturabilirsin.
+                  </p>
+                  <button class="button button-secondary" type="button" data-new-project>
+                    Yeni proje
+                  </button>
+                </div>
               </article>
 
               <div class="project-workspace" data-project-workspace hidden>
@@ -388,14 +407,14 @@
                 <article class="workflow-step is-active" data-workflow-step="sketch" data-stage-target="sketch" role="button" tabindex="0">
                   <div class="step-topline">
                     <span class="step-number">1</span>
-                    <h3>Ürün / Tasarım</h3>
+                    <h3>Taslak</h3>
                   </div>
                 </article>
 
                 <article class="workflow-step is-unlocked" data-workflow-step="product" data-stage-target="finish" role="button" tabindex="0">
                   <div class="step-topline">
                     <span class="step-number">2</span>
-                    <h3>Görsel Üretimi</h3>
+                    <h3>Ürün görseli</h3>
                   </div>
                 </article>
 
@@ -418,7 +437,7 @@
                 <section class="design-panel" aria-label="Ürün ve tasarım seçenekleri">
                   <div class="design-panel-head">
                     <p class="eyebrow">Aşama 1</p>
-                    <h3>Ürün / Tasarım</h3>
+                    <h3>Taslak</h3>
                   </div>
 
                   <div class="option-group" hidden>
@@ -562,6 +581,14 @@
                     </div>
                   </div>
 
+                  <!-- Sonuç oluşunca görünür (studio-theme.css). data-stage-target,
+                       aşama kutularıyla aynı geçişi tetikler (07-controls.js). -->
+                  <div class="result-actions sketch-next-actions">
+                    <p class="sketch-next-hint">Beğendiğin taslağı seç, sonra ürün görseline geç. Bu aşama ücretsiz.</p>
+                    <button class="button button-primary" type="button" data-stage-target="finish">
+                      Ürün görseline geç <span class="arrow" aria-hidden="true">→</span>
+                    </button>
+                  </div>
                 </section>
               </div>
 
@@ -569,7 +596,7 @@
                 <section class="design-panel" aria-label="Ürün görseli seçenekleri">
                   <div class="design-panel-head">
                     <p class="eyebrow">Aşama 2</p>
-                    <h3>Görsel Üretimi</h3>
+                    <h3>Ürün görseli</h3>
                   </div>
 
                   <div class="handoff-preview">
@@ -592,7 +619,7 @@
                         </div>
                         <div class="source-design-grid" data-design-source-grid="finish"></div>
                         <p class="source-design-empty" data-design-source-empty="finish" hidden>
-                          Henüz seçilebilecek tasarım yok. Önce Ürün / Tasarım aşamasında görsel oluştur.
+                          Henüz seçilebilecek tasarım yok. Önce Taslak aşamasında görsel oluştur.
                         </p>
                       </div>
                     </div>
@@ -751,7 +778,7 @@
                         </div>
                         <div class="source-design-grid" data-design-source-grid="mockup"></div>
                         <p class="source-design-empty" data-design-source-empty="mockup" hidden>
-                          Henüz seçilebilecek tasarım yok. Önce Ürün / Tasarım aşamasında görsel oluştur.
+                          Henüz seçilebilecek ürün görseli yok. Önce Ürün görseli aşamasında görsel oluştur.
                         </p>
                       </div>
                     </div>
@@ -872,7 +899,7 @@
                         </div>
                         <div class="source-design-grid" data-design-source-grid="manken"></div>
                         <p class="source-design-empty" data-design-source-empty="manken" hidden>
-                          Henüz seçilebilecek tasarım yok. Önce Ürün / Tasarım aşamasında görsel oluştur.
+                          Henüz seçilebilecek ürün görseli yok. Önce Ürün görseli aşamasında görsel oluştur.
                         </p>
                       </div>
                     </div>
@@ -1062,9 +1089,12 @@
                       <p class="eyebrow">Henüz tasarım yok</p>
                       <h3>Önce 2. aşamada ürün görseli oluştur.</h3>
                       <p>
-                        Bir projede Görsel Üretimi aşamasında ürün görseli oluşturduğunda,
+                        Bir projede Ürün görseli aşamasında ürün görseli oluşturduğunda,
                         buradan üzerine tıklayıp sipariş verebilirsin.
                       </p>
+                      <button class="button button-secondary empty-action" type="button" data-tab-trigger="projeler">
+                        Projelere git
+                      </button>
                     </div>
 
                     <div class="order-design-grid" data-order-design-grid hidden></div>
@@ -1169,7 +1199,7 @@
                     <span>yanındayız.</span>
                   </h2>
                 </div>
-                <button class="button button-primary" type="button" data-ticket-new>Yeni ticket aç</button>
+                <button class="button button-primary" type="button" data-ticket-new>Yeni talep aç</button>
               </div>
 
               <form class="ticket-form" data-ticket-form hidden>
@@ -1947,9 +1977,9 @@
     <script src="./studio/state/local-storage.js?v=dc7759b23b"></script>
     <script src="./studio/core/tabs.js?v=0e5706ce85"></script>
     <script src="./studio/screens/overview.js?v=36c7cf1df6"></script>
-    <script src="./studio/screens/projects.js?v=6b8e9ba40c"></script>
+    <script src="./studio/screens/projects.js?v=b77e59b8b8"></script>
     <script src="./studio/utils/zip-writer.js?v=c277be135b"></script>
-    <script src="./studio/screens/saved-designs.js?v=b823bec0eb"></script>
+    <script src="./studio/screens/saved-designs.js?v=70fe3ed244"></script>
     <script src="./studio/store/studio-store.js?v=3ecac7d59b"></script>
     <script src="./studio/services/api-service.js?v=de9139a905"></script>
     <script src="./studio/utils/pure-helpers.js?v=f28f5df1cf"></script>
@@ -1958,21 +1988,21 @@
     <!-- Stüdyo uygulaması: numara sırasıyla yüklenmeli (bkz. studio/app/). -->
     <script src="./studio/app/01-config.js?v=529f7ee035"></script>
     <script src="./studio/app/02-package-credits.js?v=c8ec4e4527"></script>
-    <script src="./studio/app/03-projects.js?v=d9fc012bd2"></script>
+    <script src="./studio/app/03-projects.js?v=dfcefa7469"></script>
     <script src="./studio/app/04-profile-tabs.js?v=82ec185558"></script>
     <script src="./studio/app/05-billing.js?v=41c264ef46"></script>
     <script src="./studio/app/06-roles-admin-credits.js?v=e1264e8e7e"></script>
     <script src="./studio/app/07-controls.js?v=743f7b140d"></script>
-    <script src="./studio/app/08-sketch-stage.js?v=f02d16e812"></script>
+    <script src="./studio/app/08-sketch-stage.js?v=ca6a9a08f4"></script>
     <script src="./studio/app/09-saved-designs.js?v=d3461a66f7"></script>
     <script src="./studio/app/10-cloud-sync.js?v=bd6b4aa68e"></script>
-    <script src="./studio/app/11-generation-jobs.js?v=7e5bc9dbac"></script>
+    <script src="./studio/app/11-generation-jobs.js?v=4cc48584fd"></script>
     <script src="./studio/app/12-design-profile.js?v=8991b636bd"></script>
-    <script src="./studio/app/13-design-sources.js?v=f9e297f2d9"></script>
-    <script src="./studio/app/14-finish-stage.js?v=621b3cd26b"></script>
+    <script src="./studio/app/13-design-sources.js?v=5dbabaf2f8"></script>
+    <script src="./studio/app/14-finish-stage.js?v=07716e6595"></script>
     <script src="./studio/app/15-local-composite.js?v=4833e988cc"></script>
     <script src="./studio/app/16-finish-results.js?v=089c8d2f73"></script>
-    <script src="./studio/app/17-mockup-stage.js?v=0831afd4ab"></script>
+    <script src="./studio/app/17-mockup-stage.js?v=2978ff1943"></script>
     <script src="./studio/app/18-orders.js?v=f1806f7414"></script>
     <script src="./studio/app/19-tickets.js?v=1ec955c86c"></script>
     <script src="./studio/app/20-admin-panel.js?v=50c760c2da"></script>
