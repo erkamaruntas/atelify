@@ -115,7 +115,10 @@ cp .env.example .env      # Supabase, fal.ai ve iyzico sandbox değerlerini dold
 npm run migrate           # SQL migration'larını uygula (SUPABASE_DB_URL gerekir)
 npm run dev               # http://localhost:3000
 npm test                  # testleri çalıştır
+npm run assets:version    # JS/CSS değiştiyse HTML'deki ?v= etiketlerini güncelle
 ```
+
+JS, CSS ve logo dosyaları `?v=<içerik özeti>` etiketiyle 1 yıl önbelleğe alınır (`vercel.json`). Bu dosyalardan birini değiştirdikten sonra `npm run assets:version` çalıştırılmalı; unutulursa `npm test` hangi etiketin eskidiğini söyler.
 
 `localhost` üzerinde stüdyo **test modunda** çalışır: üretim butonları ücretli görsel API'sini çağırmadan örnek sonuç döndürür, böylece akışın tamamı ücretsiz gezilebilir.
 

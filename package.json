@@ -7,7 +7,8 @@
     "test": "vitest",
     "migrate": "node scripts/migrate.mjs up",
     "migrate:status": "node scripts/migrate.mjs status",
-    "migrate:baseline": "node scripts/migrate.mjs baseline"
+    "migrate:baseline": "node scripts/migrate.mjs baseline",
+    "assets:version": "node scripts/asset-versions.mjs"
   },
   "dependencies": {
     "@fal-ai/client": "^1.10.0",
