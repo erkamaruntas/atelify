@@ -448,10 +448,7 @@ function showCloudSyncWarning(message) {
     warning = document.createElement("div");
     warning.dataset.cloudSyncWarning = "1";
     warning.setAttribute("role", "status");
-    warning.style.cssText =
-      "padding:12px 16px;border:1px solid rgba(185,131,70,.28);border-radius:18px;" +
-      "background:rgba(255,248,235,.92);color:#5b3b20;font-size:.9rem;font-weight:650;" +
-      "line-height:1.45;box-shadow:0 12px 28px rgba(101,77,53,.08);";
+    warning.className = "studio-notice"; // stil: studio-theme.css
     main.prepend(warning);
   }
 

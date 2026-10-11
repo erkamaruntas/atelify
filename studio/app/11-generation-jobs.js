@@ -623,13 +623,10 @@ function maybeEnableDevMode() {
   if (newDesignStudio && !document.querySelector("[data-dev-banner]")) {
     const banner = document.createElement("div");
     banner.dataset.devBanner = "1";
-    banner.style.cssText =
-      "padding:10px 16px;border-radius:14px;background:linear-gradient(135deg,#fde68a,#fbbf24);" +
-      "color:#3a2807;font-weight:700;font-size:.86rem;display:flex;align-items:center;gap:10px;";
+    banner.className = "studio-notice studio-notice--dev"; // stil: studio-theme.css
     banner.innerHTML =
-      "Test modu aktif - gerçek üretim çağrısı yapılmaz, başarılı denemede kredi düşer. " +
-      '<button type="button" data-dev-jump style="margin-left:auto;border:0;border-radius:999px;' +
-      'padding:6px 12px;background:#3a2807;color:#fde68a;cursor:pointer;font:inherit;font-weight:700">' +
+      "<span>Test modu aktif — gerçek üretim çağrısı yapılmaz, başarılı denemede kredi düşer.</span>" +
+      '<button type="button" class="button button-primary button-sm" data-dev-jump>' +
       "Görsel üretimine atla</button>";
     newDesignStudio.prepend(banner);
     banner.querySelector("[data-dev-jump]")?.addEventListener("click", devJumpToFinishStage);

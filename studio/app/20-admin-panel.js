@@ -45,7 +45,7 @@ function renderAdminRequestsTable(requests) {
         ${escapeHtml(metalLabel)}<br/>
         ${escapeHtml(sizeDetails)}<br/>
         ${request.quantity} adet
-        ${request.customerNote ? `<div style="margin-top:4px;font-style:italic;">"${escapeHtml(request.customerNote.slice(0, 120))}${request.customerNote.length > 120 ? "…" : ""}"</div>` : ""}
+        ${request.customerNote ? `<div class="request-note">"${escapeHtml(request.customerNote.slice(0, 120))}${request.customerNote.length > 120 ? "…" : ""}"</div>` : ""}
       </td>
       <td><span class="production-card-status" data-status="${escapeHtml(request.status)}">${escapeHtml(statusLabel)}</span></td>
       <td>
@@ -254,14 +254,14 @@ function adminTicketCardHtml(ticket) {
         <span class="ticket-status" data-status="${escapeHtml(status)}">${escapeHtml(statusLabel)}</span>
       </button>
       <div class="ticket-card-body" hidden>
-        <div class="cta-row" style="margin-bottom:10px;">
+        <div class="cta-row admin-ticket-tools">
           <button type="button" class="button" data-admin-view-designs data-user-id="${escapeHtml(ticket.userId || "")}">🖼️ Kullanıcının görsellerini gör</button>
         </div>
         <div class="ticket-thread">${thread}</div>
         <form class="ticket-reply" data-admin-ticket-form data-ticket-id="${escapeHtml(ticket.id)}">
           <textarea name="message" rows="2" maxlength="4000" placeholder="Yanıt yaz… (boş bırakıp sadece durumu da güncelleyebilirsin)"></textarea>
-          <div class="cta-row" style="align-items:center;gap:10px;">
-            <label style="display:flex;align-items:center;gap:6px;font-size:0.85rem;">
+          <div class="cta-row admin-ticket-reply-row">
+            <label class="admin-ticket-status-label">
               Durum
               <select name="status" data-admin-ticket-status>${statusOptions}</select>
             </label>
@@ -416,16 +416,15 @@ function ensureAdminDesignsDialog() {
   if (dialog) return dialog;
   dialog = document.createElement("dialog");
   dialog.setAttribute("data-admin-designs-dialog", "");
-  dialog.style.cssText =
-    "border:none;border-radius:16px;max-width:960px;width:92vw;max-height:88vh;padding:0;background:#15151c;color:#f4f4f7;";
+  dialog.className = "admin-designs-dialog"; // stil: studio-theme.css
   dialog.innerHTML = `
-    <div style="display:flex;flex-direction:column;max-height:88vh;">
-      <header style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.08);">
-        <strong style="font-size:1rem;">Kullanıcının ürettiği görseller</strong>
-        <button type="button" class="button" data-admin-designs-close style="padding:4px 14px;">Kapat</button>
+    <div class="admin-designs-inner">
+      <header class="admin-designs-head">
+        <strong>Kullanıcının ürettiği görseller</strong>
+        <button type="button" class="button button-secondary button-sm" data-admin-designs-close>Kapat</button>
       </header>
-      <p data-admin-designs-meta style="margin:0;padding:12px 20px 4px;font-size:0.85rem;opacity:0.75;"></p>
-      <div data-admin-designs-body style="overflow:auto;padding:10px 20px 22px;"></div>
+      <p class="admin-designs-meta" data-admin-designs-meta></p>
+      <div class="admin-designs-body" data-admin-designs-body></div>
     </div>
   `;
   document.body.appendChild(dialog);
@@ -449,15 +448,15 @@ function adminDesignGroupHtml(design) {
     .map((image) => {
       const url = escapeHtml(String(image.url || ""));
       if (!url) return "";
-      return `<a href="${url}" target="_blank" rel="noopener" style="display:block;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.12);background:#0c0c11;">
-        <img src="${url}" loading="lazy" alt="" style="width:100%;height:160px;object-fit:cover;display:block;" />
+      return `<a class="admin-design-thumb" href="${url}" target="_blank" rel="noopener">
+        <img src="${url}" loading="lazy" alt="" />
       </a>`;
     })
     .join("");
   return `
-    <section style="margin-bottom:20px;">
-      <div style="font-size:0.8rem;opacity:0.7;margin-bottom:8px;">${head}${head && when ? " · " : ""}${when}</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;">${cells}</div>
+    <section class="admin-design-group">
+      <div class="admin-design-group-meta">${head}${head && when ? " · " : ""}${when}</div>
+      <div class="admin-design-grid">${cells}</div>
     </section>
   `;
 }
