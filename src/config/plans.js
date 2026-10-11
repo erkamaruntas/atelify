@@ -1,4 +1,4 @@
-// Server-otoriter plan haritası. İstemcideki PACKAGE_PLANS (studio.js/script.js) yalnızca
+// Server-otoriter plan haritası. İstemcideki PACKAGE_PLANS (studio/app/01-config.js, script.js) yalnızca
 // gösterim içindir; kredi yükleme/yenileme kararları DAİMA buradan verilir — webhook'lara
 // gelen plan/tutar bilgisine güvenilmez.
 //

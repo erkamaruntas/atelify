@@ -26,7 +26,7 @@ describe("creditCostFor", () => {
   });
 
   // Güncel tablo (2026-06-22): mockup tabanı 5 kredi; 2K ×1.5, 4K ×2.5 (yuvarlanmış);
-  // 4'lü üretim = tek × 3. studio.js'teki STUDIO_CREDIT_COSTS ile aynı kalmalı.
+  // 4'lü üretim = tek × 3. studio/app/01-config.js'teki STUDIO_CREDIT_COSTS ile aynı kalmalı.
   it("mockup fiyatları güncel tabloyla aynı", () => {
     expect(creditCostFor("mockup", 1, { resolution: "1k" })).toBe(5);
     expect(creditCostFor("mockup", 4, { resolution: "1k" })).toBe(15);

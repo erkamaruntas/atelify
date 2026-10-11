@@ -51,7 +51,7 @@ flowchart LR
   S --> I["iyzico<br/>abonelik ve ödeme"]
 ```
 
-- **Ön yüz:** Çatısız (framework'süz) HTML/CSS/JS. Stüdyo, merkezi bir kontrolcünün (`studio.js`) etrafında küçük modüllere (`studio/`) bölünmüştür.
+- **Ön yüz:** Çatısız (framework'süz) HTML/CSS/JS. Stüdyo kodu `studio/app/` altında, yükleme sırasına göre numaralanmış dosyalara (ayarlar, projeler, aşamalar, sipariş, yönetim…) ve `studio/` altındaki küçük modüllere bölünmüştür.
 - **Arka uç:** Node.js (ES modules). Aynı servis katmanı (`src/`) canlıda Vercel serverless fonksiyonlarının, geliştirmede ise küçük bir yerel sunucunun (`server.mjs`) arkasında çalışır.
 - **Veri:** Satır düzeyi güvenlikli (RLS) Supabase Postgres, Supabase Auth ve Storage. Şema, özel bir çalıştırıcıyla (`scripts/migrate.mjs`) uygulanan 19 sürümlü SQL migration'ında tutulur.
 

@@ -1,4 +1,4 @@
-// Server-otoriter TOP-UP (ek kredi) paket haritası. İstemcideki gösterim (studio.js)
+// Server-otoriter TOP-UP (ek kredi) paket haritası. İstemcideki gösterim (studio/app/01-config.js)
 // yalnızca vitrin içindir; ödeme tutarı DAİMA buradan alınır — istemciden gelen fiyata
 // güvenilmez.
 //
