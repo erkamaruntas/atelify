@@ -371,8 +371,14 @@ if (stage) {
 
   // Bant sabit konumlu; açıkken sayfanın altına bant kadar boşluk bırak ki
   // alt kısımdaki butonlar (ör. login'deki "Atelify'a Gir") altında kalmasın.
+  // Boşluk yalnızca bant gerçekten görünürken eklenir: tarayıcı/eklenti çerez
+  // bandını gizlerse (Brave vb.) sayfanın altında boş alan kalmasın.
+  let bannerResizeObserver = null;
+
   function syncBodyOffset() {
-    document.body.style.setProperty("--cookie-consent-offset", `${banner.offsetHeight}px`);
+    const height = banner.isConnected ? banner.offsetHeight : 0;
+    document.body.style.setProperty("--cookie-consent-offset", `${height}px`);
+    document.body.classList.toggle("has-cookie-consent", height > 0);
   }
 
   function close(choice) {
@@ -380,6 +386,7 @@ if (stage) {
     banner.classList.remove("is-visible");
     document.body.classList.remove("has-cookie-consent");
     window.removeEventListener("resize", syncBodyOffset);
+    bannerResizeObserver?.disconnect();
     window.setTimeout(() => banner.remove(), 320);
   }
 
@@ -391,7 +398,11 @@ if (stage) {
 
   document.body.appendChild(banner);
   syncBodyOffset();
-  document.body.classList.add("has-cookie-consent");
   window.addEventListener("resize", syncBodyOffset);
+  // Engelleyiciler bandı sonradan gizleyebilir; boyutu değişince yeniden hesapla.
+  if ("ResizeObserver" in window) {
+    bannerResizeObserver = new ResizeObserver(syncBodyOffset);
+    bannerResizeObserver.observe(banner);
+  }
   window.requestAnimationFrame(() => banner.classList.add("is-visible"));
 })();
