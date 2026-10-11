@@ -1529,3 +1529,12 @@ body.studio-body {
   margin-top: 10px;
   font-size: 13px;
 }
+
+/* "Yeni sürüm yayında" bildirimi koyu zeminde; içindeki buton açık renkli olsun
+   (stüdyonun .button-primary kuralı onu da koyu yapıyordu). */
+.studio-body .version-notice .button,
+.studio-body .version-notice .button:hover {
+  border-color: var(--paper);
+  background: var(--paper);
+  color: var(--ink);
+}
