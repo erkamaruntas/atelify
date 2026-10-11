@@ -798,3 +798,621 @@ body.studio-body {
 .studio-body .empty-action {
   margin-top: 18px;
 }
+
+/* ==========================================================================
+   Sipariş penceresi (.order-sheet) — solda ürün görseli, sağda seçimler.
+   18-orders.js data-* etiketleriyle bağlıdır; burada yalnızca görünüm var.
+   ========================================================================== */
+.studio-body .production-dialog.order-sheet {
+  width: min(1000px, calc(100vw - 32px));
+  inline-size: min(1000px, calc(100dvw - 32px));
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--surface-strong);
+  box-shadow: 0 40px 100px rgba(28, 26, 23, 0.22);
+}
+
+.studio-body .production-dialog.order-sheet::backdrop {
+  background: rgba(28, 26, 23, 0.32);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.studio-body .order-sheet-form {
+  gap: 0;
+  padding: 0;
+  max-height: min(92vh, 820px);
+  max-height: min(92dvh, 820px);
+}
+
+.studio-body .order-sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.studio-body .order-sheet-head h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 400;
+}
+
+.studio-body .order-sheet-close {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.studio-body .order-sheet-close:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.studio-body .order-sheet-close svg {
+  width: 16px;
+  height: 16px;
+}
+
+.studio-body .order-sheet-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 3.4vw, 48px);
+  padding: 28px;
+}
+
+/* sol: ürün görseli */
+.studio-body .order-sheet-media {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--paper-deep);
+}
+
+.studio-body .order-sheet-media img {
+  width: 86%;
+  height: 86%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+/* sağ: seçimler */
+.studio-body .order-sheet-details {
+  display: grid;
+  align-content: start;
+  gap: 26px;
+}
+
+.studio-body .order-sheet-title {
+  display: grid;
+  gap: 6px;
+}
+
+.studio-body .order-sheet-title strong {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.studio-body .order-sheet-title span {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.studio-body .order-sheet .production-field legend {
+  margin-bottom: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* boyut çipleri: S M L XL tek satır */
+.studio-body .order-sheet .production-size-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: 8px;
+}
+
+.studio-body .order-sheet .production-chip {
+  position: relative;
+  justify-content: center;
+  padding: 10px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 2px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--ink);
+  text-align: center;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.studio-body .order-sheet .production-chip:hover {
+  border-color: var(--ink);
+}
+
+.studio-body .order-sheet .production-chip:has(input:checked) {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: none;
+}
+
+.studio-body .order-sheet .production-chip:has(input:focus-visible) {
+  box-shadow: var(--focus);
+}
+
+.studio-body .order-sheet .production-size-chip span {
+  justify-items: center;
+}
+
+.studio-body .order-sheet .production-size-chip strong {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.studio-body .order-sheet .production-size-chip small {
+  font-size: 11px;
+  color: inherit;
+  opacity: 0.65;
+}
+
+/* yüzük ölçüsü: TR/US + − 13 + */
+.studio-body .measure-control {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.studio-body .measure-system {
+  display: inline-flex;
+  border: 1px solid var(--line-strong);
+}
+
+.studio-body .measure-system button {
+  min-width: 48px;
+  height: 40px;
+  padding: 0 12px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.studio-body .measure-system button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.studio-body .measure-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line-strong);
+}
+
+.studio-body .measure-stepper button {
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.studio-body .measure-stepper button:hover:not(:disabled) {
+  background: var(--paper-deep);
+}
+
+.studio-body .measure-stepper button:disabled {
+  color: var(--line-strong);
+  cursor: not-allowed;
+}
+
+.studio-body .measure-stepper output {
+  min-width: 52px;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+/* asıl değerleri tutan listeler: ekranda görünmez, erişilebilir değil (kontrol yukarıda) */
+.studio-body .measure-source {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* zincir */
+.studio-body .order-sheet .production-toggle {
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.studio-body .order-sheet .production-toggle:has(input:checked) {
+  border-color: var(--ink);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+
+.studio-body .order-sheet .order-sheet-chain {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr 1fr;
+  gap: 8px;
+  max-width: none;
+}
+
+.studio-body .order-sheet .production-field-stacked > span {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.studio-body .order-sheet .production-field-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+  opacity: 1;
+}
+
+.studio-body .order-sheet textarea {
+  min-height: 72px;
+}
+
+/* özet: fiyat + buton */
+.studio-body .order-sheet-summary {
+  display: grid;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.studio-body .order-sheet .production-price-line {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  align-items: baseline;
+}
+
+.studio-body .order-sheet .production-price-line span {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.studio-body .order-sheet .production-price-line strong {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink);
+}
+
+.studio-body .order-sheet .production-dialog-error {
+  border-left: 2px solid var(--danger);
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.studio-body .order-sheet .production-dialog-actions {
+  display: block;
+}
+
+.studio-body .order-sheet .production-dialog-actions .button {
+  width: 100%;
+  min-height: 52px;
+}
+
+@media (max-width: 760px) {
+  .studio-body .production-dialog.order-sheet {
+    width: 100vw;
+    inline-size: 100dvw;
+    max-width: 100vw;
+    max-inline-size: 100dvw;
+    height: 100dvh;
+    max-height: 100dvh;
+  }
+
+  .studio-body .order-sheet-form {
+    max-height: 100dvh;
+    height: 100%;
+  }
+
+  .studio-body .order-sheet-head {
+    padding: 16px 20px;
+  }
+
+  .studio-body .order-sheet-body {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .studio-body .order-sheet-media {
+    position: static;
+    width: min(100%, 300px);
+    justify-self: center;
+  }
+
+  .studio-body .order-sheet .order-sheet-chain {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* fiyat ve buton altta hep görünür */
+  .studio-body .order-sheet-summary {
+    position: sticky;
+    bottom: -20px;
+    margin: 0 -20px -20px;
+    padding: 16px 20px 20px;
+    background: var(--surface-strong);
+  }
+}
+
+/* ==========================================================================
+   Kaydedilen tasarımlar — galeri düzeni (Tasarımlarım ve Genel Bakış).
+   Kartlar studio/screens/saved-designs.js'te oluşur: .design-card[data-stage],
+   .design-visual > img.saved-design-image + .design-stage-tag, .design-body.
+   ========================================================================== */
+.studio-body .designs-grid {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  column-gap: clamp(16px, 2vw, 28px);
+  row-gap: clamp(28px, 3vw, 44px);
+}
+
+.studio-body .design-card,
+.studio-body .saved-designs-tab-panel .design-card,
+.studio-body .overview-panel .design-card {
+  grid-template-rows: auto auto;
+  gap: 14px;
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.studio-body .design-card:hover,
+.studio-body .saved-designs-tab-panel .design-card:hover,
+.studio-body .overview-panel .design-card:hover {
+  border-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.studio-body .design-card:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
+}
+
+.studio-body .design-visual,
+.studio-body .design-visual.has-image,
+.studio-body .saved-designs-tab-panel .design-visual {
+  aspect-ratio: 1;
+  border: 0;
+  background: var(--paper-deep);
+}
+
+/* beyaz zeminli ürün fotoğrafları kâğıda karışır; siyah taslaklar olduğu gibi kalır */
+.studio-body .saved-design-image {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: multiply;
+  transition: transform 1.2s var(--ease);
+}
+
+.studio-body .design-card:hover .saved-design-image {
+  transform: scale(1.035);
+}
+
+.studio-body .design-stage-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  padding: 4px 8px;
+  background: color-mix(in srgb, var(--surface-strong) 92%, transparent);
+  color: var(--ink);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.studio-body .design-body {
+  display: grid;
+  gap: 4px;
+  padding: 0;
+}
+
+.studio-body .design-title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.studio-body .design-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* seçim modu: işaret sağ üstte, seçili kart mürekkep çerçeveli */
+.studio-body .design-select-check {
+  top: 12px;
+  right: 12px;
+  left: auto;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--ink);
+  background: var(--surface-strong);
+  box-shadow: none;
+}
+
+.studio-body .design-card.is-selected .design-select-check {
+  border-color: var(--ink);
+  background: var(--ink);
+}
+
+.studio-body .design-card.is-selected,
+.studio-body .saved-designs-tab-panel .design-card.is-selected,
+.studio-body .saved-designs-tab-panel .design-card.is-selected:hover {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.studio-body .design-card.is-selected .design-visual {
+  outline: 1px solid var(--ink);
+  outline-offset: 4px;
+}
+
+/* ---------- aşama filtresi ---------- */
+.studio-body .design-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  margin-top: 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.studio-body .design-filters button {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 10px 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.studio-body .design-filters button:hover:not(:disabled) {
+  color: var(--ink);
+}
+
+.studio-body .design-filters button[aria-pressed="true"] {
+  color: var(--ink);
+}
+
+.studio-body .design-filters button[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--ink);
+}
+
+.studio-body .design-filters button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.studio-body .design-filters span {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--gold);
+}
+
+.studio-body .designs-grid[data-filter="sketch"] .design-card:not([data-stage="sketch"]),
+.studio-body .designs-grid[data-filter="finish"] .design-card:not([data-stage="finish"]),
+.studio-body .designs-grid[data-filter="mockup"] .design-card:not([data-stage="mockup"]) {
+  display: none;
+}
+
+.studio-body .saved-designs-panel h2 em {
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+/* ---------- tasarım önizleme penceresi: tek parça sayfa ---------- */
+.studio-body .design-preview-modal .design-preview-panel {
+  gap: 0;
+  width: min(1240px, calc(100vw - var(--preview-modal-safe-space)));
+  border: 1px solid var(--line);
+  background: var(--surface-strong);
+  box-shadow: 0 40px 100px rgba(28, 26, 23, 0.22);
+}
+
+.studio-body .design-preview-modal .design-preview-media {
+  border: 0;
+  border-right: 1px solid var(--line);
+  border-radius: 0;
+  background: var(--paper-deep);
+  box-shadow: none;
+}
+
+.studio-body .design-preview-modal .design-preview-image {
+  mix-blend-mode: multiply;
+}
+
+.studio-body .design-preview-modal .design-preview-info {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.studio-body .design-preview-modal .design-preview-title {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+
+.studio-body .design-preview-modal .design-preview-close {
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 11px;
+}
+
+.studio-body .design-preview-modal .design-preview-detail dt {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.studio-body .design-preview-modal .design-preview-detail dd {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+@media (max-width: 920px) {
+  .studio-body .design-preview-modal .design-preview-media {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}

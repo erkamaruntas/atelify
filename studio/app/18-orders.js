@@ -277,7 +277,9 @@ function renderOrderRingSizeOptions(form, product, selectedShape, selectedSize) 
       if (option.key === active) input.checked = true;
       const text = document.createElement("span");
       const title = document.createElement("strong");
-      title.textContent = option.label;
+      // Şekil adı pencere başlığında zaten yazıyor; çipte yalnızca beden (S, M, L, XL).
+      title.textContent = option.label.split(" - ").pop();
+      input.setAttribute("aria-label", `${option.label}, ${option.dimensions}`);
       const dimensions = document.createElement("small");
       dimensions.textContent = option.dimensions;
       text.append(title, dimensions);
@@ -329,6 +331,57 @@ function renderOrderPendantSizeOptions(form, product, selectedShape, selectedSiz
       return label;
     })
   );
+}
+
+// Sipariş penceresindeki "TR / US" düğmesi ve "− 13 +" sayacı. Asıl değerler gizli
+// <select>'lerde durur (fiyat ve sepet kodu onları okur); bu kontrol yalnızca onları
+// günceller ve "change" olayını tetikler, böylece fiyat kendiliğinden yeniden hesaplanır.
+function bindRingMeasureControl(form) {
+  const control = form.querySelector("[data-measure-control]");
+  const select = form.querySelector("[data-production-ring-measure-select]");
+  const systemSelect = form.querySelector("[data-production-ring-measure-system]");
+  if (!control || !select || !systemSelect || control.dataset.bound) return;
+  control.dataset.bound = "1";
+
+  const output = control.querySelector("[data-measure-value]");
+  const stepButtons = [...control.querySelectorAll("[data-measure-step]")];
+  const systemButtons = [...control.querySelectorAll("[data-measure-system]")];
+
+  const sync = () => {
+    if (output) output.textContent = select.value || "—";
+    const index = select.selectedIndex;
+    stepButtons.forEach((button) => {
+      const step = Number(button.dataset.measureStep);
+      button.disabled = step < 0 ? index <= 0 : index >= select.options.length - 1;
+    });
+    systemButtons.forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.measureSystem === systemSelect.value));
+    });
+  };
+
+  stepButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const next = select.selectedIndex + Number(button.dataset.measureStep);
+      if (next < 0 || next >= select.options.length) return;
+      select.selectedIndex = next;
+      select.dispatchEvent(new Event("change", { bubbles: true }));
+      sync();
+    });
+  });
+
+  systemButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      if (systemSelect.value === button.dataset.measureSystem) return;
+      systemSelect.value = button.dataset.measureSystem;
+      systemSelect.dispatchEvent(new Event("change", { bubbles: true }));
+      sync();
+    });
+  });
+
+  // Liste yeniden doldurulunca (pencere açılışı, ölçü sistemi değişimi) görüntüyü tazele.
+  new MutationObserver(sync).observe(select, { childList: true });
+  select.addEventListener("change", sync);
+  sync();
 }
 
 function renderOrderRingMeasureOptions(form, product, selectedMeasure, selectedSystem) {
@@ -955,6 +1008,7 @@ function openOrderDialog(snapshot, options = {}) {
   renderOrderRingSizeOptions(form, product, shape, options.body?.sizeKey || options.body?.metadata?.ringSizeKey || "");
   renderOrderPendantSizeOptions(form, product, shape, options.body?.sizeKey || "");
   renderOrderRingMeasureOptions(form, product, options.body?.metadata?.ringMeasure || "", options.body?.metadata?.ringMeasureSystem || "");
+  bindRingMeasureControl(form);
   updateOrderChainVisibility(form, product);
 
   if (form.elements.customerNote) form.elements.customerNote.value = options.body?.customerNote || "";

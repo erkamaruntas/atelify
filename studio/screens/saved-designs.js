@@ -12,6 +12,12 @@
   let selectionControls = null;
   let lastRender = { designs: [], targets: null };
 
+  // Aşama filtresi (Tümü / Taslak / Ürün görseli / Vitrin & manken). Kartlar
+  // data-stage taşır; gizleme CSS ile yapılır (studio-theme.css).
+  const DESIGN_FILTER_STAGES = ["sketch", "finish", "mockup"];
+  let activeDesignFilter = "all";
+  let filterControlsBound = false;
+
   class SavedDesignsPage {
     constructor(elements = {}) {
       this.elements = elements;
@@ -45,6 +51,51 @@
     grid.classList.toggle("is-selecting", selectionMode);
     grid.replaceChildren(...designList.map(createSavedDesignCard));
     updateSelectionControls();
+    updateDesignFilters(grid, designList);
+  }
+
+  function designFilterStage(design) {
+    return DESIGN_FILTER_STAGES.includes(design?.sourceStage) ? design.sourceStage : "sketch";
+  }
+
+  // Kartın üstündeki kısa aşama etiketi.
+  function designStageTag(design) {
+    const stage = designFilterStage(design);
+    if (stage === "finish") return "Ürün görseli";
+    if (stage === "mockup") return /manken/i.test(design?.stage || "") ? "Manken" : "Vitrin";
+    return "Taslak";
+  }
+
+  function updateDesignFilters(grid, designList) {
+    const panel = grid.closest("[data-saved-designs-panel]");
+    const group = panel?.querySelector("[data-design-filters]");
+    if (!group) return;
+
+    const counts = { all: designList.length };
+    DESIGN_FILTER_STAGES.forEach((stage) => {
+      counts[stage] = designList.filter((design) => designFilterStage(design) === stage).length;
+    });
+    // Seçili filtrede tasarım kalmadıysa "Tümü"ne dön.
+    if (activeDesignFilter !== "all" && !counts[activeDesignFilter]) activeDesignFilter = "all";
+
+    group.querySelectorAll("[data-design-filter]").forEach((button) => {
+      const key = button.dataset.designFilter;
+      const count = button.querySelector("[data-design-filter-count]");
+      if (count) count.textContent = String(counts[key] || 0);
+      button.disabled = key !== "all" && !counts[key];
+      button.setAttribute("aria-pressed", String(key === activeDesignFilter));
+    });
+    grid.dataset.filter = activeDesignFilter;
+
+    if (!filterControlsBound) {
+      filterControlsBound = true;
+      group.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-design-filter]");
+        if (!button || button.disabled) return;
+        activeDesignFilter = button.dataset.designFilter;
+        updateDesignFilters(grid, lastRender.designs);
+      });
+    }
   }
 
   function createSavedDesignCard(design) {
@@ -52,6 +103,7 @@
     const titleText = isLoading ? design.title || "Tasarım" : projectLabel(design);
     const card = document.createElement("article");
     card.className = isLoading ? "design-card is-loading" : "design-card";
+    card.dataset.stage = designFilterStage(design);
     if (!isLoading) card.dataset.designKey = designKey(design);
 
     if (isLoading) {
@@ -99,6 +151,10 @@
       image.decoding = "async";
       image.loading = "lazy";
       visual.append(image);
+      const tag = document.createElement("span");
+      tag.className = "design-stage-tag";
+      tag.textContent = designStageTag(design);
+      visual.append(tag);
       if (selectionMode) {
         const check = document.createElement("span");
         check.className = "design-select-check";
@@ -118,10 +174,16 @@
     meta.className = "design-meta";
 
     const stage = document.createElement("span");
-    stage.textContent = isLoading ? "Görsel hazırlanıyor" : design.stage || "Tasarım Görseli";
+    // Aşama artık görselin üstündeki etikette; burada kayıt tarihi gösterilir.
+    const savedAt = design?.createdAt ? new Date(design.createdAt) : null;
+    stage.textContent = isLoading
+      ? "Görsel hazırlanıyor"
+      : savedAt && !Number.isNaN(savedAt.getTime())
+        ? savedAt.toLocaleDateString("tr-TR", { day: "numeric", month: "long" })
+        : design.stage || "Tasarım görseli";
 
     const productShape = document.createElement("span");
-    productShape.textContent = productShapeLabel(design);
+    productShape.textContent = [productShapeLabel(design), design?.metalLabel || ""].filter(Boolean).join(" · ");
     productShape.hidden = !productShape.textContent;
 
     meta.append(stage, productShape);

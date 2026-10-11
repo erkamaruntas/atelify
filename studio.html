@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="./system.css?v=a85808712b" />
     <link rel="stylesheet" href="./styles.css?v=bb7738075e" />
     <link rel="stylesheet" href="./studio.css?v=b0e31ac86d" />
-    <link rel="stylesheet" href="./studio-theme.css?v=a37bedf2a0" />
+    <link rel="stylesheet" href="./studio-theme.css?v=1a274341d8" />
   </head>
   <body class="studio-body">
     <!-- Auth loading overlay -->
@@ -1016,7 +1016,13 @@
               <div class="panel-heading">
                 <div>
                   <p class="eyebrow">Koleksiyon</p>
-                  <h2>Kaydedilen tasarımlar</h2>
+                  <h2>Kaydedilen <em>tasarımlar</em></h2>
+                  <div class="design-filters" role="group" aria-label="Aşamaya göre filtrele" data-design-filters>
+                    <button type="button" data-design-filter="all" aria-pressed="true">Tümü <span data-design-filter-count>0</span></button>
+                    <button type="button" data-design-filter="sketch" aria-pressed="false">Taslak <span data-design-filter-count>0</span></button>
+                    <button type="button" data-design-filter="finish" aria-pressed="false">Ürün görseli <span data-design-filter-count>0</span></button>
+                    <button type="button" data-design-filter="mockup" aria-pressed="false">Vitrin &amp; manken <span data-design-filter-count>0</span></button>
+                  </div>
                 </div>
                 <div class="saved-designs-actions">
                   <button class="button button-secondary" type="button" data-saved-designs-select-toggle>Seç</button>
@@ -1762,103 +1768,119 @@
           </form>
         </dialog>
 
-        <dialog class="production-dialog" data-production-dialog>
-          <form method="dialog" class="production-dialog-form" data-production-form>
-            <header class="production-dialog-head">
-              <p class="eyebrow">Sipariş</p>
+        <dialog class="production-dialog order-sheet" data-production-dialog>
+          <!-- Sipariş penceresi: solda ürün görseli, sağda seçimler (studio-theme.css → .order-sheet).
+               data-* etiketleri ve alan adları 18-orders.js ile bağlıdır; değiştirme. -->
+          <form method="dialog" class="production-dialog-form order-sheet-form" data-production-form>
+            <header class="order-sheet-head">
               <h3>Sipariş oluştur</h3>
-              <p>Seçili ürün görselinin ölçü, zincir ve not detaylarını tamamla.</p>
+              <button type="button" class="order-sheet-close" data-production-cancel aria-label="Kapat">
+                <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+                  <path d="M5 5l10 10M15 5L5 15" />
+                </svg>
+              </button>
             </header>
 
-            <div class="production-dialog-preview" data-production-preview>
-              <img alt="Seçili tasarım" data-production-preview-img />
-              <div>
-                <strong data-production-preview-title>Tasarım</strong>
-                <span data-production-preview-subtitle></span>
+            <div class="order-sheet-body">
+              <div class="order-sheet-media" data-production-preview>
+                <img alt="Seçili tasarım" data-production-preview-img />
+              </div>
+
+              <div class="order-sheet-details">
+                <div class="order-sheet-title">
+                  <p class="eyebrow">Tasarım</p>
+                  <strong data-production-preview-title>Tasarım</strong>
+                  <span data-production-preview-subtitle></span>
+                </div>
+
+                <fieldset class="production-field" data-production-ring-size hidden>
+                  <legend>Yüzey boyutu</legend>
+                  <div class="production-size-grid" data-production-ring-size-row></div>
+                </fieldset>
+
+                <fieldset class="production-field" data-production-pendant-size hidden>
+                  <legend>Kolye ucu ölçüsü</legend>
+                  <div class="production-size-grid" data-production-pendant-size-row></div>
+                  <p class="production-field-hint" data-production-pendant-size-hint></p>
+                </fieldset>
+
+                <fieldset class="production-field" data-production-ring-measure hidden>
+                  <legend>Yüzük ölçüsü</legend>
+                  <!-- Görünen kontrol; değerleri aşağıdaki gizli listelere yazar (order-sheet.js). -->
+                  <div class="measure-control" data-measure-control>
+                    <div class="measure-system" role="group" aria-label="Ölçü sistemi">
+                      <button type="button" data-measure-system="tr" aria-pressed="true">TR</button>
+                      <button type="button" data-measure-system="us" aria-pressed="false">US</button>
+                    </div>
+                    <div class="measure-stepper">
+                      <button type="button" data-measure-step="-1" aria-label="Ölçüyü küçült">−</button>
+                      <output data-measure-value aria-live="polite">—</output>
+                      <button type="button" data-measure-step="1" aria-label="Ölçüyü büyüt">+</button>
+                    </div>
+                  </div>
+                  <div class="measure-source" aria-hidden="true">
+                    <select name="ringMeasureSystem" data-production-ring-measure-system tabindex="-1">
+                      <option value="tr" selected>TR</option>
+                      <option value="us">US</option>
+                    </select>
+                    <select name="ringMeasure" data-production-ring-measure-select tabindex="-1"></select>
+                  </div>
+                </fieldset>
+
+                <fieldset class="production-field" data-production-chain hidden>
+                  <legend>Zincir</legend>
+                  <label class="production-toggle">
+                    <input type="checkbox" name="chainIncluded" data-production-chain-included />
+                    <span>
+                      <strong>Zincir de istiyorum</strong>
+                      <small>İşaretlemezsen yalnızca kolye ucu üretilir.</small>
+                    </span>
+                  </label>
+                  <div class="production-field-inline order-sheet-chain" data-production-chain-details hidden>
+                    <label class="production-field-stacked">
+                      <span>Kalınlık</span>
+                      <select name="chainType" data-production-chain-type>
+                        <option value="ince">İnce forse</option>
+                        <option value="orta" selected>Orta forse</option>
+                        <option value="kalin">Kalın forse</option>
+                      </select>
+                    </label>
+                    <label class="production-field-stacked">
+                      <span>Birim</span>
+                      <select name="chainLengthUnit" data-production-chain-unit>
+                        <option value="cm" selected>cm</option>
+                        <option value="inch">inç</option>
+                      </select>
+                    </label>
+                    <label class="production-field-stacked">
+                      <span>Uzunluk</span>
+                      <input type="number" name="chainLengthValue" data-production-chain-length inputmode="decimal" />
+                    </label>
+                  </div>
+                  <p class="production-field-hint" data-production-chain-hint>
+                    Tüm zincirlerimiz forse zincirdir.
+                  </p>
+                </fieldset>
+
+                <fieldset class="production-field">
+                  <legend>Sipariş notu</legend>
+                  <textarea name="customerNote" rows="2" maxlength="2000" placeholder="Atölyeye iletmek istediğin not" aria-label="Sipariş notu"></textarea>
+                </fieldset>
+
+                <div class="order-sheet-summary">
+                  <div class="production-price-line" data-production-price hidden>
+                    <span>Tahmini fiyat</span>
+                    <strong data-production-price-value>—</strong>
+                  </div>
+
+                  <p class="production-dialog-error" data-production-error hidden></p>
+
+                  <footer class="production-dialog-actions">
+                    <button type="submit" class="button button-primary" data-production-submit>Sepete ekle</button>
+                  </footer>
+                </div>
               </div>
             </div>
-
-            <fieldset class="production-field" data-production-ring-size hidden>
-              <legend>Yüzey boyutu</legend>
-              <div class="production-size-grid" data-production-ring-size-row></div>
-            </fieldset>
-
-            <fieldset class="production-field" data-production-pendant-size hidden>
-              <legend>Kolye ucu ölçüsü</legend>
-              <div class="production-size-grid" data-production-pendant-size-row></div>
-              <p class="production-field-hint" data-production-pendant-size-hint></p>
-            </fieldset>
-
-            <fieldset class="production-field" data-production-ring-measure hidden>
-              <legend>Yüzük ölçüsü</legend>
-              <div class="production-field-inline">
-                <label class="production-field-stacked">
-                  <span>Ölçü sistemi</span>
-                  <select name="ringMeasureSystem" data-production-ring-measure-system>
-                    <option value="tr" selected>TR</option>
-                    <option value="us">US</option>
-                  </select>
-                </label>
-                <label class="production-field-stacked">
-                  <span>Beden</span>
-                  <select name="ringMeasure" data-production-ring-measure-select></select>
-                </label>
-              </div>
-            </fieldset>
-
-            <fieldset class="production-field" data-production-chain hidden>
-              <legend>Zincir (opsiyonel)</legend>
-              <label class="production-toggle">
-                <input type="checkbox" name="chainIncluded" data-production-chain-included />
-                <span>
-                  <strong>Zincir de istiyorum</strong>
-                  <small>İşaretlemezsen yalnızca kolye ucu üretilir, zincir gönderilmez.</small>
-                </span>
-              </label>
-              <div class="production-field-inline" data-production-chain-details hidden>
-                <label class="production-field-stacked">
-                  <span>Kalınlık</span>
-                  <select name="chainType" data-production-chain-type>
-                    <option value="ince">İnce forse</option>
-                    <option value="orta" selected>Orta forse</option>
-                    <option value="kalin">Kalın forse</option>
-                  </select>
-                </label>
-                <label class="production-field-stacked">
-                  <span>Birim</span>
-                  <select name="chainLengthUnit" data-production-chain-unit>
-                    <option value="cm" selected>cm</option>
-                    <option value="inch">inç</option>
-                  </select>
-                </label>
-                <label class="production-field-stacked">
-                  <span>Uzunluk</span>
-                  <input type="number" name="chainLengthValue" data-production-chain-length inputmode="decimal" />
-                </label>
-              </div>
-              <p class="production-field-hint" data-production-chain-hint>
-                Tüm zincirlerimiz forse zincirdir.
-              </p>
-            </fieldset>
-
-            <fieldset class="production-field">
-              <label class="production-field-stacked">
-                <span>Sipariş notu</span>
-                <textarea name="customerNote" rows="3" maxlength="2000" placeholder="Üretim için eklemek istediğin not"></textarea>
-              </label>
-            </fieldset>
-
-            <div class="production-price-line" data-production-price hidden>
-              <span>Tahmini fiyat</span>
-              <strong data-production-price-value>—</strong>
-            </div>
-
-            <p class="production-dialog-error" data-production-error hidden></p>
-
-            <footer class="production-dialog-actions">
-              <button type="button" class="button button-secondary" data-production-cancel>Vazgeç</button>
-              <button type="submit" class="button button-primary" data-production-submit>Sepete ekle</button>
-            </footer>
           </form>
         </dialog>
 
@@ -1979,7 +2001,7 @@
     <script src="./studio/screens/overview.js?v=36c7cf1df6"></script>
     <script src="./studio/screens/projects.js?v=b77e59b8b8"></script>
     <script src="./studio/utils/zip-writer.js?v=c277be135b"></script>
-    <script src="./studio/screens/saved-designs.js?v=70fe3ed244"></script>
+    <script src="./studio/screens/saved-designs.js?v=4e62373e74"></script>
     <script src="./studio/store/studio-store.js?v=3ecac7d59b"></script>
     <script src="./studio/services/api-service.js?v=de9139a905"></script>
     <script src="./studio/utils/pure-helpers.js?v=f28f5df1cf"></script>
@@ -2003,7 +2025,7 @@
     <script src="./studio/app/15-local-composite.js?v=4833e988cc"></script>
     <script src="./studio/app/16-finish-results.js?v=089c8d2f73"></script>
     <script src="./studio/app/17-mockup-stage.js?v=2978ff1943"></script>
-    <script src="./studio/app/18-orders.js?v=f1806f7414"></script>
+    <script src="./studio/app/18-orders.js?v=6c33336b0e"></script>
     <script src="./studio/app/19-tickets.js?v=1ec955c86c"></script>
     <script src="./studio/app/20-admin-panel.js?v=50c760c2da"></script>
     <script src="./studio/app/21-stage-costs.js?v=a20ef936cf"></script>
