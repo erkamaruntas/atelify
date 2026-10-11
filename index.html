@@ -26,516 +26,219 @@
     <meta name="twitter:title" content="Atelify" />
     <meta name="twitter:description" content="Görselini yükle; Atelify onu kolye, yüzük veya üretime hazır mücevher tasarımına dönüştürsün." />
     <meta name="twitter:image" content="https://atelify.aruntas.com/assets/ring-molds.jpg" />
-    <link rel="icon" href="/favicon.ico?v=f7c6e8b012" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/brand/favicon-32.png?v=f56c2353e3" />
-    <link rel="icon" type="image/png" sizes="192x192" href="./assets/brand/favicon-192.png?v=e50cbe889b" />
-    <link rel="apple-touch-icon" href="./assets/brand/apple-touch-icon.png?v=83b0e61f48" />
-    <link rel="stylesheet" href="./styles.css?v=95ceedb869" />
-    <script src="./script.js?v=6eac748abb" defer></script>
+    <link rel="icon" href="/favicon.ico?v=df4ffe8ae5" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/brand/favicon-32.png?v=54f592300f" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/brand/favicon-192.png?v=9f8b9337e8" />
+    <link rel="apple-touch-icon" href="./assets/brand/apple-touch-icon.png?v=07ab4cb3e5" />
+    <link rel="stylesheet" href="./system.css?v=a85808712b" />
+    <link rel="stylesheet" href="./site.css?v=7334b0cd7d" />
+    <script src="./script.js?v=bd553e8395" defer></script>
+    <script src="./home.js?v=40a781927f" defer></script>
     <script src="./header-auth.js?v=81fc0fae3d" defer></script>
   </head>
-  <body class="home-body">
-    <div class="portfolio-banner" role="note">
-      <strong>Portföy projesi</strong>
-      <span>Ödemeler test modundadır; gerçek tahsilat yapılmaz.</span>
-    </div>
-    <div class="page-shell">
-      <header class="site-header home-header">
+  <body class="page-home">
+    <div class="site-note" role="note"><strong>Portföy projesi</strong> · Ödemeler test modundadır; gerçek tahsilat yapılmaz.</div>
+    <header class="site-header" data-site-header>
+      <div class="wrap site-header-inner">
         <a class="brand" href="./index.html" aria-label="Atelify ana sayfa">
-          <img class="brand-logo" src="./assets/brand/logo.png?v=2bc28b5d46" alt="" width="28" height="28" />
+          <img class="brand-logo" src="./assets/brand/logo.png?v=d45e048fa4" alt="" width="20" height="20" />
           <span class="brand-mark">Atelify</span>
         </a>
-
-        <nav class="site-nav home-nav" aria-label="Ana navigasyon">
+        <nav class="site-nav" aria-label="Ana navigasyon">
           <a href="./nasil-calisir.html">Nasıl çalışır</a>
           <a href="./paketler.html">Paketler</a>
         </nav>
-
         <div class="header-actions">
           <a class="button button-primary" href="./studio">Atelify'ı Aç</a>
         </div>
-      </header>
+      </div>
+    </header>
 
-      <main class="home-main">
-        <section class="minimal-hero" aria-label="Atelify ana ekranı">
-          <div class="minimal-copy reveal">
-            <div>
-              <p class="eyebrow">Fikirden mücevhere</p>
-              <h1>Bir görsel yükle. Mücevhere dönüşsün.</h1>
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="wrap hero-grid">
+          <div>
+            <p class="eyebrow reveal">Kişiye özel mücevher tasarımı</p>
+            <h1 id="hero-title" class="reveal">Bir anıdan,<br /><em>bir mücevhere.</em></h1>
+            <p class="lead reveal">
+              Bir görsel yükle. Atelify onu kazımaya hazır bir gravür çizimine, çizimi de
+              gerçek bir yüzüğe ya da kolyeye dönüştürsün.
+            </p>
+            <div class="simple-actions reveal">
+              <a class="button button-primary" href="./studio">10 ücretsiz krediyle başla <span class="arrow" aria-hidden="true">→</span></a>
+              <a class="ghost-link" href="#surec">Nasıl çalışır</a>
             </div>
           </div>
 
-          <div class="minimal-showcase reveal" aria-label="Atelify ile oluşturulabilecek sonuçlar">
-            <aside class="showcase-promo">
-              <p class="promo-kicker">Atelify ile yapıldı</p>
-              <a class="button button-primary" href="./studio">Ücretsiz 10 krediyle dene</a>
-            </aside>
+          <figure class="hero-figure reveal">
+            <div class="frame on-paper">
+              <img src="./assets/hero-gallery/zambak-gumus-kare-on.webp" alt="Zambak kabartmalı gümüş kare yüzük" width="720" height="720" fetchpriority="high" />
+            </div>
+            <figcaption><span>Zambak — gümüş mühür yüzük</span><span class="numeral">N° 01</span></figcaption>
+          </figure>
+        </div>
 
-            <div class="showcase-media-rail" aria-label="Atelify ile yapılan taslak, ürün, mockup ve manken görselleri">
-              <div class="showcase-marquee">
-                <div class="showcase-track">
-                  <div class="showcase-group">
-                    <article class="draft-card draft-card-wide">
-                      <div class="draft-media draft-media-photo is-dark">
-                        <img src="./assets/hero-gallery/zambak-taslak.webp" alt="Zambak demetinin siyah beyaz gravür çizimi" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>1 · Taslak</span>
-                        <strong>Zambak çizimi</strong>
-                      </div>
-                    </article>
+        <div class="wrap">
+          <div class="facts reveal">
+            <div><strong>4 aşama</strong>Taslak, ürün, mockup, manken</div>
+            <div><strong>10 kredi</strong>Ücretsiz başlangıç</div>
+            <div><strong>0 kredi</strong>Ürün görseli her zaman ücretsiz</div>
+          </div>
+        </div>
+      </section>
 
-                    <article class="draft-card draft-card-video">
-                      <div class="draft-media draft-media-photo is-dark draft-media-morph">
-                        <img src="./assets/hero-gallery/ataturk-taslak.webp" alt="Atatürk çiziminin kare gümüş yüzüğe dönüşümü" width="720" height="720" decoding="async" fetchpriority="low" />
-                        <img src="./assets/hero-gallery/ataturk-kare-yuzuk.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>Taslak → Ürün</span>
-                        <strong>Çizimden yüzüğe</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-tall">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/zambak-yuzuk-elde.webp" alt="Zambak kabartmalı gümüş kare yüzük elde" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>4 · Manken</span>
-                        <strong>Zambak yüzük, elde</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo">
-                        <img src="./assets/hero-gallery/zambak-altin-yuzuk.webp" alt="Zambak kabartmalı altın oval yüzük" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>3 · Mockup</span>
-                        <strong>Altın zambak yüzük</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-wide">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/melek-kolye-manken.webp" alt="Melek kabartmalı altın kolye boyunda" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>4 · Manken</span>
-                        <strong>Melek kolye</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo">
-                        <img src="./assets/hero-gallery/sutun-yuzuk.webp" alt="Antik sütun gravürlü gümüş yüzük" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>2 · Ürün</span>
-                        <strong>Sütun motifli yüzük</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-tall">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/melek-kolye-tas.webp" alt="Melek kabartmalı altın kolye taş üzerinde" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>3 · Mockup</span>
-                        <strong>Melek kolye, taş üzerinde</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo is-dark">
-                        <img src="./assets/hero-gallery/kolezyum-taslak.webp" alt="Kolezyum'un siyah beyaz gravür çizimi" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>1 · Taslak</span>
-                        <strong>Kolezyum gravürü</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-wide">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/altin-oval-kolye-kumas.webp" alt="Kabartmalı altın oval kolye kumaş üzerinde" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>3 · Mockup</span>
-                        <strong>Altın kolye, kumaş üzerinde</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-tall">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/gul-kolye-manken.webp" alt="Gül kabartmalı altın oval kolye boyunda" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>4 · Manken</span>
-                        <strong>Gül kolye</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo">
-                        <img src="./assets/hero-gallery/zambak-gumus-kare-yan.webp" alt="Zambak kabartmalı gümüş kare yüzük" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>3 · Mockup</span>
-                        <strong>Gümüş zambak, kare</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo">
-                        <img src="./assets/hero-gallery/oval-gumus-yuzuk.webp" alt="Gravürlü oval gümüş yüzük" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>2 · Ürün</span>
-                        <strong>Oval gümüş yüzük</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-tall">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/kartal-kolye-manken.webp" alt="Kartal kabartmalı gümüş kolye boyunda" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>4 · Manken</span>
-                        <strong>Kartal kolye</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-wide">
-                      <div class="draft-media draft-media-photo">
-                        <img src="./assets/hero-gallery/ataturk-rose-yuzuk.webp" alt="Atatürk kabartmalı rose altın yüzük" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>3 · Mockup</span>
-                        <strong>Rose altın yüzük</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/melek-gumus-kolye-manken.webp" alt="Melek kabartmalı gümüş kolye boyunda" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>4 · Manken</span>
-                        <strong>Gümüş melek kolye</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo">
-                        <img src="./assets/hero-gallery/zambak-gumus-kare-on.webp" alt="Zambak kabartmalı gümüş kare yüzük önden" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>3 · Mockup</span>
-                        <strong>Gümüş zambak, kabartma</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-tall">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/gul-kolye-ince-manken.webp" alt="Gül kabartmalı küçük altın kolye boyunda" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>4 · Manken</span>
-                        <strong>Gül kolye, ince zincir</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/melek-kolye-studyo.webp" alt="Melek kabartmalı altın kolye stüdyo çekimi" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>3 · Mockup</span>
-                        <strong>Melek kolye, stüdyo</strong>
-                      </div>
-                    </article>
-                  </div>
-
-                  <div class="showcase-group" aria-hidden="true">
-                    <article class="draft-card draft-card-wide">
-                      <div class="draft-media draft-media-photo is-dark">
-                        <img src="./assets/hero-gallery/zambak-taslak.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>1 · Taslak</span>
-                        <strong>Zambak çizimi</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-video">
-                      <div class="draft-media draft-media-photo is-dark draft-media-morph">
-                        <img src="./assets/hero-gallery/ataturk-taslak.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                        <img src="./assets/hero-gallery/ataturk-kare-yuzuk.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>Taslak → Ürün</span>
-                        <strong>Çizimden yüzüğe</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-tall">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/zambak-yuzuk-elde.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>4 · Manken</span>
-                        <strong>Zambak yüzük, elde</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo">
-                        <img src="./assets/hero-gallery/zambak-altin-yuzuk.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>3 · Mockup</span>
-                        <strong>Altın zambak yüzük</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-wide">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/melek-kolye-manken.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>4 · Manken</span>
-                        <strong>Melek kolye</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo">
-                        <img src="./assets/hero-gallery/sutun-yuzuk.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>2 · Ürün</span>
-                        <strong>Sütun motifli yüzük</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-tall">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/melek-kolye-tas.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>3 · Mockup</span>
-                        <strong>Melek kolye, taş üzerinde</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo is-dark">
-                        <img src="./assets/hero-gallery/kolezyum-taslak.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>1 · Taslak</span>
-                        <strong>Kolezyum gravürü</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-wide">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/altin-oval-kolye-kumas.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>3 · Mockup</span>
-                        <strong>Altın kolye, kumaş üzerinde</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-tall">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/gul-kolye-manken.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>4 · Manken</span>
-                        <strong>Gül kolye</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo">
-                        <img src="./assets/hero-gallery/zambak-gumus-kare-yan.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>3 · Mockup</span>
-                        <strong>Gümüş zambak, kare</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo">
-                        <img src="./assets/hero-gallery/oval-gumus-yuzuk.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>2 · Ürün</span>
-                        <strong>Oval gümüş yüzük</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-tall">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/kartal-kolye-manken.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>4 · Manken</span>
-                        <strong>Kartal kolye</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-wide">
-                      <div class="draft-media draft-media-photo">
-                        <img src="./assets/hero-gallery/ataturk-rose-yuzuk.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>3 · Mockup</span>
-                        <strong>Rose altın yüzük</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/melek-gumus-kolye-manken.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>4 · Manken</span>
-                        <strong>Gümüş melek kolye</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo">
-                        <img src="./assets/hero-gallery/zambak-gumus-kare-on.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>3 · Mockup</span>
-                        <strong>Gümüş zambak, kabartma</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card draft-card-tall">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/gul-kolye-ince-manken.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>4 · Manken</span>
-                        <strong>Gül kolye, ince zincir</strong>
-                      </div>
-                    </article>
-
-                    <article class="draft-card">
-                      <div class="draft-media draft-media-photo is-cover">
-                        <img src="./assets/hero-gallery/melek-kolye-studyo.webp" alt="" width="720" height="720" decoding="async" fetchpriority="low" />
-                      </div>
-                      <div class="draft-card-meta">
-                        <span>3 · Mockup</span>
-                        <strong>Melek kolye, stüdyo</strong>
-                      </div>
-                    </article>
-                  </div>
-                </div>
+      <section class="transform" id="surec" data-transform aria-label="Fotoğraftan mücevhere">
+        <div class="transform-stage">
+          <div class="wrap transform-grid">
+            <div>
+              <div class="transform-copy">
+                <article class="transform-step is-active" data-transform-step>
+                  <span class="numeral">I.</span>
+                  <h2>Fotoğraf</h2>
+                  <p class="lead">Bir çiçek, bir portre, bir sembol. Sana bir şey hatırlatan herhangi bir görselle başla.</p>
+                </article>
+                <article class="transform-step" data-transform-step>
+                  <span class="numeral">II.</span>
+                  <h2>Gravür</h2>
+                  <p class="lead">Yapay zekâ konuyu korur ve onu metale kazınmaya hazır, temiz bir gravür çizimine çevirir.</p>
+                </article>
+                <article class="transform-step" data-transform-step>
+                  <span class="numeral">III.</span>
+                  <h2>Mücevher</h2>
+                  <p class="lead">Çizim gerçek yüzük ve kolye kalıplarına oturur. Sipariş vermeden önce sonucu görürsün.</p>
+                </article>
+              </div>
+              <div class="progress" aria-hidden="true">
+                <span><i data-transform-bar></i></span>
+                <span><i data-transform-bar></i></span>
+                <span><i data-transform-bar></i></span>
+              </div>
+              <div class="progress-labels eyebrow" aria-hidden="true">
+                <span>Fotoğraf</span><span>Gravür</span><span>Mücevher</span>
               </div>
             </div>
-          </div>
 
-          <div class="minimal-copy-side post-showcase-copy reveal">
-            <div class="conversion-flow" aria-label="Atelify dönüşüm akışı">
-              <article class="conversion-step">
-                <img class="conversion-thumb is-dark" src="./assets/hero-gallery/zambak-taslak.webp" alt="" width="720" height="720" loading="lazy" decoding="async" />
-                <div>
-                  <span class="conversion-index">01</span>
-                  <strong>Taslak</strong>
-                  <span>Görselini yükle; yapay zekâ kazımaya hazır bir çizime çevirir.</span>
-                </div>
-              </article>
-
-              <article class="conversion-step">
-                <img class="conversion-thumb" src="./assets/hero-gallery/ataturk-kare-yuzuk.webp" alt="" width="720" height="720" loading="lazy" decoding="async" />
-                <div>
-                  <span class="conversion-index">02</span>
-                  <strong>Ürün</strong>
-                  <span>Çizim gerçek yüzük ve kolye kalıplarına oturur. Ücretsiz.</span>
-                </div>
-              </article>
-
-              <article class="conversion-step">
-                <img class="conversion-thumb" src="./assets/hero-gallery/zambak-altin-yuzuk.webp" alt="" width="720" height="720" loading="lazy" decoding="async" />
-                <div>
-                  <span class="conversion-index">03</span>
-                  <strong>Mockup</strong>
-                  <span>Satışa hazır stüdyo ve sahne fotoğrafı.</span>
-                </div>
-              </article>
-
-              <article class="conversion-step">
-                <img class="conversion-thumb" src="./assets/hero-gallery/gul-kolye-manken.webp" alt="" width="720" height="720" loading="lazy" decoding="async" />
-                <div>
-                  <span class="conversion-index">04</span>
-                  <strong>Manken</strong>
-                  <span>Ürünü elde ya da boyunda gör.</span>
-                </div>
-              </article>
-            </div>
-
-            <div class="minimal-actions">
-              <a class="button button-primary" href="./studio">Atelify'da Dene</a>
-              <a class="button button-secondary" href="./nasil-calisir.html">Nasıl çalışır?</a>
+            <div class="transform-visual">
+              <img class="is-active" data-transform-visual src="./assets/hero-gallery/zambak-foto.webp" alt="Pembe zambak fotoğrafı" width="720" height="720" loading="lazy" />
+              <img data-transform-visual src="./assets/hero-gallery/zambak-taslak.webp" alt="Zambağın gravür çizimi" width="720" height="720" loading="lazy" />
+              <img class="on-paper" data-transform-visual src="./assets/hero-gallery/zambak-altin-yuzuk.webp" alt="Zambak gravürlü altın yüzük" width="720" height="720" loading="lazy" />
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="home-video reveal" aria-labelledby="home-video-title">
-          <div class="home-video-copy">
-            <p class="eyebrow">Tanıtım</p>
-            <h2 id="home-video-title">Atelify'ı bir dakikada izle.</h2>
+      <section class="section rule-top" aria-labelledby="stages-title">
+        <div class="wrap">
+          <div class="section-head">
+            <h2 id="stages-title" class="reveal">Dört aşama,<br /><em>tek akış.</em></h2>
+            <p class="lead reveal">Her aşamayı aynı proje içinde ilerletirsin; istediğin noktada durup siparişe geçebilirsin.</p>
           </div>
-          <div class="home-video-frame">
+          <div class="stages">
+            <article class="stage-item reveal">
+              <div class="frame"><img src="./assets/hero-gallery/zambak-taslak.webp" alt="" width="720" height="720" loading="lazy" /></div>
+              <span class="numeral">01</span>
+              <h3>Taslak</h3>
+              <p>Görselini yükle; yapay zekâ kazımaya hazır bir çizime çevirir.</p>
+            </article>
+            <article class="stage-item reveal">
+              <div class="frame on-paper"><img src="./assets/hero-gallery/ataturk-kare-yuzuk.webp" alt="" width="720" height="720" loading="lazy" /></div>
+              <span class="numeral">02</span>
+              <h3>Ürün</h3>
+              <p>Çizim gerçek yüzük ve kolye kalıplarına oturur. Ücretsiz.</p>
+            </article>
+            <article class="stage-item reveal">
+              <div class="frame on-paper"><img src="./assets/hero-gallery/zambak-altin-yuzuk.webp" alt="" width="720" height="720" loading="lazy" /></div>
+              <span class="numeral">03</span>
+              <h3>Mockup</h3>
+              <p>Satışa hazır stüdyo ve sahne fotoğrafı.</p>
+            </article>
+            <article class="stage-item reveal">
+              <div class="frame"><img src="./assets/hero-gallery/gul-kolye-manken.webp" alt="" width="720" height="720" loading="lazy" /></div>
+              <span class="numeral">04</span>
+              <h3>Manken</h3>
+              <p>Ürünü elde ya da boyunda gör.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section rule-top" id="galeri" aria-labelledby="gallery-title">
+        <div class="wrap">
+          <div class="section-head">
+            <h2 id="gallery-title" class="reveal">Atelify ile<br /><em>tasarlandı.</em></h2>
+            <p class="lead reveal">Her parça tek bir görselden başladı. Hiçbiri hazır bir katalogdan seçilmedi.</p>
+          </div>
+          <div class="gallery">
+            <figure class="g1 reveal">
+              <div class="frame"><img src="./assets/hero-gallery/zambak-yuzuk-elde.webp" alt="Zambak kabartmalı gümüş kare yüzük elde" width="720" height="720" loading="lazy" /></div>
+              <figcaption><span>Zambak yüzük, gümüş</span><span class="numeral">N° 02</span></figcaption>
+            </figure>
+            <figure class="g2 reveal">
+              <div class="frame on-paper"><img src="./assets/hero-gallery/ataturk-rose-yuzuk.webp" alt="Atatürk kabartmalı rose altın yüzük" width="720" height="720" loading="lazy" /></div>
+              <figcaption><span>Portre yüzük, rose</span><span class="numeral">N° 03</span></figcaption>
+            </figure>
+            <figure class="g3 reveal">
+              <div class="frame"><img src="./assets/hero-gallery/melek-kolye-studyo.webp" alt="Melek kabartmalı altın kolye stüdyo çekimi" width="720" height="720" loading="lazy" /></div>
+              <figcaption><span>Melek kolye, altın</span><span class="numeral">N° 04</span></figcaption>
+            </figure>
+            <figure class="g4 reveal">
+              <div class="frame"><img src="./assets/hero-gallery/melek-kolye-manken.webp" alt="Melek kabartmalı altın kolye boyunda" width="720" height="720" loading="lazy" /></div>
+              <figcaption><span>Melek kolye, boyunda</span><span class="numeral">N° 05</span></figcaption>
+            </figure>
+            <figure class="g5 reveal">
+              <div class="frame on-paper"><img src="./assets/hero-gallery/sutun-yuzuk.webp" alt="Antik sütun gravürlü gümüş yüzük" width="720" height="720" loading="lazy" /></div>
+              <figcaption><span>Sütun motifli yüzük</span><span class="numeral">N° 06</span></figcaption>
+            </figure>
+            <figure class="g6 reveal">
+              <div class="frame"><img src="./assets/hero-gallery/kartal-kolye-manken.webp" alt="Kartal kabartmalı gümüş kolye boyunda" width="720" height="720" loading="lazy" /></div>
+              <figcaption><span>Kartal kolye, gümüş</span><span class="numeral">N° 07</span></figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="section film" aria-labelledby="film-title">
+        <div class="wrap">
+          <div class="section-head">
+            <h2 id="film-title" class="reveal">Bir dakikada<br /><em>Atelify.</em></h2>
+            <p class="lead reveal">Fotoğraftan siparişe kadar bütün akışı kısa bir filmde izle.</p>
+          </div>
+          <div class="reveal">
             <video controls playsinline preload="none" poster="./assets/video/atelify-tanitim-poster.jpg" width="1920" height="1080">
               <source src="./assets/video/atelify-tanitim.mp4" type="video/mp4" />
             </video>
           </div>
-        </section>
-      </main>
-
-      <footer class="home-footer" aria-labelledby="home-cta-title">
-        <section class="home-contact">
-          <div class="home-contact-copy">
-            <p class="home-contact-label">Başla</p>
-            <h2 id="home-cta-title">Aklındaki mücevheri Atelify'da dene.</h2>
-          </div>
-
-          <div class="home-contact-details" aria-label="Başlangıç seçenekleri">
-            <p class="home-contact-mail">10 ücretsiz krediyle ilk taslağını oluştur.</p>
-
-            <div class="simple-actions">
-              <a class="button button-primary" href="./studio">Atelify'ı Aç</a>
-              <a class="button button-secondary" href="./nasil-calisir.html">Nasıl çalışır?</a>
-            </div>
-          </div>
-        </section>
-
-        <div class="home-footer-bottom">
-          <span>Atelify</span>
-          <small>© 2026 Atelify. Tüm hakları saklıdır.</small>
-
-          <nav class="home-footer-links" aria-label="Alt sayfa bağlantıları">
-            <a href="./nasil-calisir.html">Nasıl çalışır</a>
-            <a href="./paketler.html">Paketler</a>
-            <a href="./studio">Atelify'ı Aç</a>
-            <a href="./kvkk.html">KVKK Aydınlatma</a>
-            <a href="./gizlilik.html">Gizlilik</a>
-            <a href="./kullanim-kosullari.html">Kullanım Koşulları</a>
-            <a href="./cerez-politikasi.html">Çerez Politikası</a>
-            <a href="./mesafeli-satis.html">Mesafeli Satış</a>
-          </nav>
         </div>
-      </footer>
-    </div>
+      </section>
+
+      <section class="section statement" aria-labelledby="cta-title">
+        <div class="wrap">
+          <p class="eyebrow reveal">Başla</p>
+          <h2 id="cta-title" class="reveal">Aklındaki mücevher, <em>bir görsel uzağında.</em></h2>
+          <div class="simple-actions reveal">
+            <a class="button button-primary" href="./studio">10 ücretsiz krediyle başla <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="ghost-link" href="./paketler.html">Paketleri gör</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap site-footer-inner">
+        <div class="site-footer-brand">
+          <span class="brand-mark">Atelify</span>
+          <small>© 2026 Atelify. Tüm hakları saklıdır.</small>
+        </div>
+        <nav aria-label="Alt sayfa bağlantıları">
+          <a href="./nasil-calisir.html">Nasıl çalışır</a>
+          <a href="./paketler.html">Paketler</a>
+          <a href="./kvkk.html">KVKK Aydınlatma</a>
+          <a href="./gizlilik.html">Gizlilik</a>
+          <a href="./kullanim-kosullari.html">Kullanım Koşulları</a>
+          <a href="./cerez-politikasi.html">Çerez Politikası</a>
+          <a href="./mesafeli-satis.html">Mesafeli Satış</a>
+        </nav>
+      </div>
+    </footer>
   </body>
 </html>

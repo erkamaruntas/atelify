@@ -26,50 +26,49 @@
     <meta name="twitter:title" content="Atelify · Paketler" />
     <meta name="twitter:description" content="Atelify paketleri: Ücretsiz, Go, Pro ve Max ile görselden mücevher tasarımına, mockup ve manken görsellerine ve siparişe ilerle." />
     <meta name="twitter:image" content="https://atelify.aruntas.com/assets/ring-molds.jpg" />
-    <link rel="icon" href="/favicon.ico?v=f7c6e8b012" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/brand/favicon-32.png?v=f56c2353e3" />
-    <link rel="icon" type="image/png" sizes="192x192" href="./assets/brand/favicon-192.png?v=e50cbe889b" />
-    <link rel="apple-touch-icon" href="./assets/brand/apple-touch-icon.png?v=83b0e61f48" />
-    <link rel="stylesheet" href="./styles.css?v=95ceedb869" />
-    <script src="./script.js?v=6eac748abb" defer></script>
+    <link rel="icon" href="/favicon.ico?v=df4ffe8ae5" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/brand/favicon-32.png?v=54f592300f" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/brand/favicon-192.png?v=9f8b9337e8" />
+    <link rel="apple-touch-icon" href="./assets/brand/apple-touch-icon.png?v=07ab4cb3e5" />
+    <link rel="stylesheet" href="./system.css?v=a85808712b" />
+    <link rel="stylesheet" href="./site.css?v=7334b0cd7d" />
+    <script src="./script.js?v=bd553e8395" defer></script>
     <script src="./header-auth.js?v=81fc0fae3d" defer></script>
   </head>
-  <body class="home-body">
-    <div class="portfolio-banner" role="note">
-      <strong>Portföy projesi</strong>
-      <span>Ödemeler test modundadır; gerçek tahsilat yapılmaz.</span>
-    </div>
-    <div class="page-shell">
-      <header class="site-header home-header">
+  <body class="page-packages">
+    <div class="site-note" role="note"><strong>Portföy projesi</strong> · Ödemeler test modundadır; gerçek tahsilat yapılmaz.</div>
+    <header class="site-header" data-site-header>
+      <div class="wrap site-header-inner">
         <a class="brand" href="./index.html" aria-label="Atelify ana sayfa">
-          <img class="brand-logo" src="./assets/brand/logo.png?v=2bc28b5d46" alt="" width="28" height="28" />
+          <img class="brand-logo" src="./assets/brand/logo.png?v=d45e048fa4" alt="" width="20" height="20" />
           <span class="brand-mark">Atelify</span>
         </a>
-
-        <nav class="site-nav home-nav" aria-label="Ana navigasyon">
+        <nav class="site-nav" aria-label="Ana navigasyon">
           <a href="./nasil-calisir.html">Nasıl çalışır</a>
           <a href="./paketler.html" aria-current="page">Paketler</a>
         </nav>
-
         <div class="header-actions">
           <a class="button button-primary" href="./studio">Atelify'ı Aç</a>
         </div>
-      </header>
+      </div>
+    </header>
 
-      <main class="package-page-main">
-        <section class="package-hero reveal" aria-labelledby="package-title">
-          <div class="package-hero-copy">
-            <p class="eyebrow">Paketler</p>
-            <h1 id="package-title">İhtiyacına göre başla, büyüdükçe yükselt.</h1>
+    <main>
+      <section class="section" aria-labelledby="package-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow reveal">Paketler</p>
+              <h1 id="package-title" class="reveal">İhtiyacına göre başla, <em>büyüdükçe yükselt.</em></h1>
+            </div>
+            <p class="lead reveal">Ücretsiz planla dene; düzenli üretim için aylık paketlerden birine geç.</p>
           </div>
-        </section>
 
-        <section class="package-plans reveal" id="paketler" aria-label="Atelify paketleri">
-          <div class="plan-grid package-plan-grid">
+          <div class="plans reveal" id="paketler" aria-label="Atelify paketleri">
             <article class="plan-card" data-package-card="free">
-              <div class="package-card-head">
+              <div class="plan-head">
                 <p class="plan-name">Ücretsiz</p>
-                <span class="package-chip">Deneme</span>
+                <span class="tag">Deneme</span>
               </div>
               <h3>Fikrini ilk tasarıma çevirmek için.</h3>
               <div class="plan-price">
@@ -82,15 +81,13 @@
                 <li>İlk mockup ya da manken denemesi</li>
                 <li>Destek talebi</li>
               </ul>
-              <a class="button button-secondary" href="./studio?paket=free" data-package-select="free">
-                Ücretsiz dene
-              </a>
+              <a class="button button-secondary" href="./studio?paket=free" data-package-select="free">Ücretsiz dene</a>
             </article>
 
             <article class="plan-card" data-package-card="go">
-              <div class="package-card-head">
+              <div class="plan-head">
                 <p class="plan-name">Go</p>
-                <span class="package-chip">Başlangıç</span>
+                <span class="tag">Başlangıç</span>
               </div>
               <h3>Bir ürünü baştan sona çıkarmak için.</h3>
               <div class="plan-price">
@@ -103,15 +100,13 @@
                 <li>Gerektiğinde ek kredi yükleme</li>
                 <li>Destek talebi</li>
               </ul>
-              <a class="button button-secondary" href="./odeme.html?paket=go" data-package-select="go">
-                Go'yu seç
-              </a>
+              <a class="button button-secondary" href="./odeme.html?paket=go" data-package-select="go">Go'yu seç</a>
             </article>
 
             <article class="plan-card plan-card-featured" data-package-card="pro">
-              <div class="package-card-head">
+              <div class="plan-head">
                 <p class="plan-name">Pro</p>
-                <span class="plan-badge">Önerilen</span>
+                <span class="tag tag-ink">Önerilen</span>
               </div>
               <h3>Düzenli koleksiyon ve sipariş akışı için.</h3>
               <div class="plan-price">
@@ -124,15 +119,13 @@
                 <li>Katalog ve mağaza görseli çıktıları</li>
                 <li>Fiziksel sipariş ve ek kredi yükleme</li>
               </ul>
-              <a class="button button-primary" href="./odeme.html?paket=pro" data-package-select="pro">
-                Pro'yu seç
-              </a>
+              <a class="button button-primary" href="./odeme.html?paket=pro" data-package-select="pro">Pro'yu seç</a>
             </article>
 
             <article class="plan-card" data-package-card="max">
-              <div class="package-card-head">
+              <div class="plan-head">
                 <p class="plan-name">Max</p>
-                <span class="package-chip">Marka</span>
+                <span class="tag">Marka</span>
               </div>
               <h3>Ekip, marka ve yüksek hacimli üretim için.</h3>
               <div class="plan-price">
@@ -145,85 +138,76 @@
                 <li>Marka sunumu ve satış görseli hazırlığı</li>
                 <li>Fiziksel sipariş ve ek kredi yükleme</li>
               </ul>
-              <a class="button button-secondary" href="./odeme.html?paket=max" data-package-select="max">
-                Max'i seç
-              </a>
+              <a class="button button-secondary" href="./odeme.html?paket=max" data-package-select="max">Max'i seç</a>
             </article>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="package-costs reveal" aria-labelledby="package-costs-title">
-          <div class="package-costs-head">
-            <p class="eyebrow">Kredi rehberi</p>
-            <h2 id="package-costs-title">Kredi neye yeter?</h2>
-            <p>
-              Her aşamanın 1K çözünürlükteki kredi karşılığı. 4'lü üretim, tek tek
-              üretmekten %25 daha az kredi kullanır; 2K ve 4K çözünürlük daha fazla kredi harcar.
-            </p>
+      <section class="section rule-top" aria-labelledby="costs-title">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow reveal">Kredi rehberi</p>
+              <h2 id="costs-title" class="reveal">Kredi <em>neye yeter?</em></h2>
+            </div>
+            <p class="lead reveal">Her aşamanın 1K çözünürlükteki karşılığı. 4'lü üretim tek tek üretmekten %25 daha az kredi kullanır; 2K ve 4K daha fazla harcar.</p>
           </div>
-          <div class="package-cost-grid">
-            <article class="package-cost-card">
-              <div class="package-cost-media is-dark">
-                <img src="./assets/hero-gallery/zambak-taslak.webp" alt="" width="720" height="720" loading="lazy" decoding="async" />
-              </div>
-              <span>Taslak</span>
+          <div class="costs">
+            <article class="cost reveal">
+              <div class="frame"><img src="./assets/hero-gallery/zambak-taslak.webp" alt="" width="720" height="720" loading="lazy" /></div>
+              <p class="eyebrow">Taslak</p>
               <strong>1 kredi</strong>
               <small>4'lü: 3 kredi</small>
             </article>
-            <article class="package-cost-card">
-              <div class="package-cost-media">
-                <img src="./assets/hero-gallery/sutun-yuzuk.webp" alt="" width="720" height="720" loading="lazy" decoding="async" />
-              </div>
-              <span>Ürün görseli</span>
+            <article class="cost reveal">
+              <div class="frame on-paper"><img src="./assets/hero-gallery/sutun-yuzuk.webp" alt="" width="720" height="720" loading="lazy" /></div>
+              <p class="eyebrow">Ürün görseli</p>
               <strong>Ücretsiz</strong>
               <small>Sınırsız</small>
             </article>
-            <article class="package-cost-card">
-              <div class="package-cost-media is-cover">
-                <img src="./assets/hero-gallery/melek-kolye-tas.webp" alt="" width="720" height="720" loading="lazy" decoding="async" />
-              </div>
-              <span>Mockup</span>
+            <article class="cost reveal">
+              <div class="frame"><img src="./assets/hero-gallery/melek-kolye-tas.webp" alt="" width="720" height="720" loading="lazy" /></div>
+              <p class="eyebrow">Mockup</p>
               <strong>5 kredi</strong>
               <small>4'lü: 15 kredi</small>
             </article>
-            <article class="package-cost-card">
-              <div class="package-cost-media is-cover">
-                <img src="./assets/hero-gallery/gul-kolye-manken.webp" alt="" width="720" height="720" loading="lazy" decoding="async" />
-              </div>
-              <span>Manken</span>
+            <article class="cost reveal">
+              <div class="frame"><img src="./assets/hero-gallery/gul-kolye-manken.webp" alt="" width="720" height="720" loading="lazy" /></div>
+              <p class="eyebrow">Manken</p>
               <strong>6 kredi</strong>
               <small>4'lü: 18 kredi</small>
             </article>
           </div>
-        </section>
 
-        <section class="package-note reveal">
-          <p>
-            Go, Pro ve Max aylık aboneliktir; krediler her ay sıfırlanıp yenilenir,
-            kullanılmayan krediler bir sonraki aya devretmez. Ücretsiz plan tek seferliktir.
-            Abonelerin kredisi biterse profilinden ek kredi yükleyebilir. Ödemeler güvenli
-            ödeme altyapısıyla alınır.
-          </p>
-          <div class="simple-actions">
-            <a class="button button-secondary" href="./nasil-calisir.html">Nasıl çalışır?</a>
-            <a class="button button-secondary" href="./index.html">Ana sayfaya dön</a>
+          <div class="fine-print reveal">
+            <p>
+              Go, Pro ve Max aylık aboneliktir; krediler her ay sıfırlanıp yenilenir, kullanılmayan
+              krediler bir sonraki aya devretmez. Ücretsiz plan tek seferliktir. Abonelerin kredisi
+              biterse profilinden ek kredi yükleyebilir. Ödemeler güvenli ödeme altyapısıyla alınır.
+            </p>
+            <a class="ghost-link" href="./nasil-calisir.html">Nasıl çalışır</a>
           </div>
-        </section>
-      </main>
-
-      <footer class="site-footer">
-        <div class="home-footer-bottom">
-          <span>Atelify</span>
-          <small>© 2026 Atelify. Tüm hakları saklıdır.</small>
-          <nav class="home-footer-links" aria-label="Yasal sayfalar">
-            <a href="./kvkk.html">KVKK Aydınlatma</a>
-            <a href="./gizlilik.html">Gizlilik</a>
-            <a href="./kullanim-kosullari.html">Kullanım Koşulları</a>
-            <a href="./cerez-politikasi.html">Çerez Politikası</a>
-            <a href="./mesafeli-satis.html">Mesafeli Satış</a>
-          </nav>
         </div>
-      </footer>
-    </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap site-footer-inner">
+        <div class="site-footer-brand">
+          <span class="brand-mark">Atelify</span>
+          <small>© 2026 Atelify. Tüm hakları saklıdır.</small>
+        </div>
+        <nav aria-label="Alt sayfa bağlantıları">
+          <a href="./nasil-calisir.html">Nasıl çalışır</a>
+          <a href="./paketler.html">Paketler</a>
+          <a href="./kvkk.html">KVKK Aydınlatma</a>
+          <a href="./gizlilik.html">Gizlilik</a>
+          <a href="./kullanim-kosullari.html">Kullanım Koşulları</a>
+          <a href="./cerez-politikasi.html">Çerez Politikası</a>
+          <a href="./mesafeli-satis.html">Mesafeli Satış</a>
+        </nav>
+      </div>
+    </footer>
   </body>
 </html>

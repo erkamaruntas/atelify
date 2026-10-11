@@ -26,204 +26,207 @@
     <meta name="twitter:title" content="Atelify Login" />
     <meta name="twitter:description" content="Atelify hesabına giriş yapın, koleksiyon akışınızı ve üretim katmanınızı yönetin." />
     <meta name="twitter:image" content="https://atelify.aruntas.com/assets/ring-molds.jpg" />
-    <link rel="icon" href="/favicon.ico?v=f7c6e8b012" sizes="any" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/brand/favicon-32.png?v=f56c2353e3" />
-    <link rel="icon" type="image/png" sizes="192x192" href="./assets/brand/favicon-192.png?v=e50cbe889b" />
-    <link rel="apple-touch-icon" href="./assets/brand/apple-touch-icon.png?v=83b0e61f48" />
-    <link rel="stylesheet" href="./styles.css?v=95ceedb869" />
-    <script src="./script.js?v=6eac748abb" defer></script>
+    <link rel="icon" href="/favicon.ico?v=df4ffe8ae5" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/brand/favicon-32.png?v=54f592300f" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/brand/favicon-192.png?v=9f8b9337e8" />
+    <link rel="apple-touch-icon" href="./assets/brand/apple-touch-icon.png?v=07ab4cb3e5" />
+    <link rel="stylesheet" href="./system.css?v=a85808712b" />
+    <link rel="stylesheet" href="./site.css?v=7334b0cd7d" />
+    <script src="./script.js?v=bd553e8395" defer></script>
     <script src="./login-auth.js?v=e9a6d7fe56" defer></script>
   </head>
-  <body class="login-body">
-    <div class="portfolio-banner" role="note">
-      <strong>Portföy projesi</strong>
-      <span>Ödemeler test modundadır; gerçek tahsilat yapılmaz.</span>
-    </div>
-    <div class="page-shell">
-      <header class="site-header login-header">
-        <a class="brand" href="./index.html#top" aria-label="Atelify ana sayfaya dön">
-          <img class="brand-logo" src="./assets/brand/logo.png?v=2bc28b5d46" alt="" width="28" height="28" />
+  <body class="page-auth">
+    <div class="site-note" role="note"><strong>Portföy projesi</strong> · Ödemeler test modundadır; gerçek tahsilat yapılmaz.</div>
+    <header class="site-header" data-site-header>
+      <div class="wrap site-header-inner">
+        <a class="brand" href="./index.html" aria-label="Atelify ana sayfa">
+          <img class="brand-logo" src="./assets/brand/logo.png?v=d45e048fa4" alt="" width="20" height="20" />
           <span class="brand-mark">Atelify</span>
         </a>
-
+        <nav class="site-nav" aria-label="Ana navigasyon">
+          <a href="./nasil-calisir.html">Nasıl çalışır</a>
+          <a href="./paketler.html">Paketler</a>
+        </nav>
         <div class="header-actions">
-          <a class="ghost-link" href="./index.html">Ana Sayfaya Dön</a>
-          <a class="button button-secondary" href="./paketler.html">Paketleri Gör</a>
+
         </div>
-      </header>
+      </div>
+    </header>
 
-      <main class="login-main">
-        <section class="login-shell section">
-          <section class="login-panel reveal" aria-label="Giriş formu">
-            <div class="login-panel-head">
-              <h2 data-auth-heading>Tekrar hoş geldin.</h2>
-              <p data-auth-body hidden></p>
-            </div>
+    <main class="auth-main">
+        <section class="auth-panel reveal" aria-label="Giriş formu">
+          <div class="auth-panel-head">
+            <p class="eyebrow">Hesabın</p>
+            <h1 data-auth-heading>Tekrar hoş geldin.</h1>
+            <p data-auth-body hidden></p>
+          </div>
 
-            <div class="auth-mode-switch" data-auth-mode-switch role="tablist" aria-label="Giriş veya üyelik">
-              <button
-                class="auth-mode-button is-active"
-                type="button"
-                data-auth-mode-trigger="sign-in"
-                aria-selected="true"
-              >
-                Giriş yap
-              </button>
-              <button
-                class="auth-mode-button"
-                type="button"
-                data-auth-mode-trigger="sign-up"
-                aria-selected="false"
-              >
-                Üye ol
-              </button>
-            </div>
+          <div class="auth-mode-switch" data-auth-mode-switch role="tablist" aria-label="Giriş veya üyelik">
+            <button
+              class="auth-mode-button is-active"
+              type="button"
+              data-auth-mode-trigger="sign-in"
+              aria-selected="true"
+            >
+              Giriş yap
+            </button>
+            <button
+              class="auth-mode-button"
+              type="button"
+              data-auth-mode-trigger="sign-up"
+              aria-selected="false"
+            >
+              Üye ol
+            </button>
+          </div>
 
-            <form class="login-form" data-login-form data-login-view>
-              <label class="field">
-                <span>E-posta adresi</span>
-                <input
-                  type="email"
-                  name="email"
-                  autocomplete="email"
-                  placeholder="kullaniciadi@ornek.com"
-                  required
-                />
-              </label>
+          <form class="login-form" data-login-form data-login-view>
+            <label class="field">
+              <span>E-posta adresi</span>
+              <input
+                type="email"
+                name="email"
+                autocomplete="email"
+                placeholder="kullaniciadi@ornek.com"
+                required
+              />
+            </label>
 
-              <label class="field">
-                <span>Şifre</span>
-                <input
-                  type="password"
-                  name="password"
-                  autocomplete="current-password"
-                  placeholder="••••••••••"
-                  required
-                />
-              </label>
+            <label class="field">
+              <span>Şifre</span>
+              <input
+                type="password"
+                name="password"
+                autocomplete="current-password"
+                placeholder="••••••••••"
+                required
+              />
+            </label>
 
-              <div class="login-row">
-                <div class="login-row-actions">
-                  <button class="ghost-button" type="button" data-reset-password>
-                    Şifremi unuttum
-                  </button>
-                </div>
-              </div>
-
-              <button class="button button-primary login-submit" type="submit" data-submit-button>
-                Atelify'a Gir
-              </button>
-            </form>
-
-            <form class="login-form" data-sign-up-form data-sign-up-view hidden>
-              <label class="field">
-                <span>E-posta adresi</span>
-                <input
-                  type="email"
-                  name="email"
-                  autocomplete="email"
-                  placeholder="kullaniciadi@ornek.com"
-                  required
-                />
-              </label>
-
-              <label class="field">
-                <span>Şifre</span>
-                <input
-                  type="password"
-                  name="password"
-                  autocomplete="new-password"
-                  placeholder="En az 8 karakter"
-                  minlength="8"
-                  required
-                />
-              </label>
-
-              <label class="field">
-                <span>Şifre (tekrar)</span>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  autocomplete="new-password"
-                  placeholder="Şifreyi tekrar yaz"
-                  minlength="8"
-                  required
-                />
-              </label>
-
-              <button class="button button-secondary login-submit" type="submit" data-sign-up-button>
-                Üye ol
-              </button>
-            </form>
-
-            <div class="auth-message" data-auth-message role="status" aria-live="polite" hidden></div>
-
-            <div class="auth-resend" data-resend-verification hidden>
-              <p>Doğrulama e-postası gelmediyse tekrar gönderebilirsin.</p>
-              <button class="ghost-button" type="button" data-resend-button>
-                Doğrulama e-postasını tekrar gönder
-              </button>
-            </div>
-
-            <form class="login-form recovery-form" data-recovery-form hidden>
-              <label class="field">
-                <span>Yeni şifre</span>
-                <input
-                  type="password"
-                  name="newPassword"
-                  autocomplete="new-password"
-                  placeholder="Yeni şifrenizi yazın"
-                  minlength="8"
-                  required
-                />
-              </label>
-
-              <label class="field">
-                <span>Yeni şifre (tekrar)</span>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  autocomplete="new-password"
-                  placeholder="Şifreyi tekrar edin"
-                  minlength="8"
-                  required
-                />
-              </label>
-
-              <button class="button button-secondary login-submit" type="submit">
-                Şifreyi güncelle
-              </button>
-            </form>
-
-            <section class="session-card" data-session-card hidden>
-              <p class="eyebrow">Oturum Açık</p>
-              <strong data-session-email></strong>
-
-              <div class="session-actions">
-                <a class="button button-primary" href="./index.html">Ana sayfaya dön</a>
-                <button class="button button-secondary" type="button" data-sign-out>
-                  Çıkış yap
+            <div class="login-row">
+              <div class="login-row-actions">
+                <button class="ghost-button" type="button" data-reset-password>
+                  Şifremi unuttum
                 </button>
               </div>
-            </section>
+            </div>
 
+            <button class="button button-primary login-submit" type="submit" data-submit-button>
+              Atelify'a Gir
+            </button>
+          </form>
+
+          <form class="login-form" data-sign-up-form data-sign-up-view hidden>
+            <label class="field">
+              <span>E-posta adresi</span>
+              <input
+                type="email"
+                name="email"
+                autocomplete="email"
+                placeholder="kullaniciadi@ornek.com"
+                required
+              />
+            </label>
+
+            <label class="field">
+              <span>Şifre</span>
+              <input
+                type="password"
+                name="password"
+                autocomplete="new-password"
+                placeholder="En az 8 karakter"
+                minlength="8"
+                required
+              />
+            </label>
+
+            <label class="field">
+              <span>Şifre (tekrar)</span>
+              <input
+                type="password"
+                name="confirmPassword"
+                autocomplete="new-password"
+                placeholder="Şifreyi tekrar yaz"
+                minlength="8"
+                required
+              />
+            </label>
+
+            <button class="button button-secondary login-submit" type="submit" data-sign-up-button>
+              Üye ol
+            </button>
+          </form>
+
+          <div class="auth-message" data-auth-message role="status" aria-live="polite" hidden></div>
+
+          <div class="auth-resend" data-resend-verification hidden>
+            <p>Doğrulama e-postası gelmediyse tekrar gönderebilirsin.</p>
+            <button class="ghost-button" type="button" data-resend-button>
+              Doğrulama e-postasını tekrar gönder
+            </button>
+          </div>
+
+          <form class="login-form recovery-form" data-recovery-form hidden>
+            <label class="field">
+              <span>Yeni şifre</span>
+              <input
+                type="password"
+                name="newPassword"
+                autocomplete="new-password"
+                placeholder="Yeni şifrenizi yazın"
+                minlength="8"
+                required
+              />
+            </label>
+
+            <label class="field">
+              <span>Yeni şifre (tekrar)</span>
+              <input
+                type="password"
+                name="confirmPassword"
+                autocomplete="new-password"
+                placeholder="Şifreyi tekrar edin"
+                minlength="8"
+                required
+              />
+            </label>
+
+            <button class="button button-secondary login-submit" type="submit">
+              Şifreyi güncelle
+            </button>
+          </form>
+
+          <section class="session-card" data-session-card hidden>
+            <p class="eyebrow">Oturum Açık</p>
+            <strong data-session-email></strong>
+
+            <div class="session-actions">
+              <a class="button button-primary" href="./index.html">Ana sayfaya dön</a>
+              <button class="button button-secondary" type="button" data-sign-out>
+                Çıkış yap
+              </button>
+            </div>
           </section>
-        </section>
-      </main>
 
-      <footer class="site-footer">
-        <div class="home-footer-bottom">
-          <span>Atelify</span>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap site-footer-inner">
+        <div class="site-footer-brand">
+          <span class="brand-mark">Atelify</span>
           <small>© 2026 Atelify. Tüm hakları saklıdır.</small>
-          <nav class="home-footer-links" aria-label="Yasal sayfalar">
-            <a href="./kvkk.html">KVKK Aydınlatma</a>
-            <a href="./gizlilik.html">Gizlilik</a>
-            <a href="./kullanim-kosullari.html">Kullanım Koşulları</a>
-            <a href="./cerez-politikasi.html">Çerez Politikası</a>
-            <a href="./mesafeli-satis.html">Mesafeli Satış</a>
-          </nav>
         </div>
-      </footer>
-    </div>
+        <nav aria-label="Alt sayfa bağlantıları">
+          <a href="./nasil-calisir.html">Nasıl çalışır</a>
+          <a href="./paketler.html">Paketler</a>
+          <a href="./kvkk.html">KVKK Aydınlatma</a>
+          <a href="./gizlilik.html">Gizlilik</a>
+          <a href="./kullanim-kosullari.html">Kullanım Koşulları</a>
+          <a href="./cerez-politikasi.html">Çerez Politikası</a>
+          <a href="./mesafeli-satis.html">Mesafeli Satış</a>
+        </nav>
+      </div>
+    </footer>
   </body>
 </html>

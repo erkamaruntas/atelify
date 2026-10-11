@@ -189,6 +189,15 @@ const revealObserver = new IntersectionObserver(
 
 revealItems.forEach((item) => revealObserver.observe(item));
 
+/* Header: sayfa kaydırılınca altına ince çizgi (system.css .is-scrolled). */
+const siteHeader = document.querySelector("[data-site-header]");
+
+if (siteHeader) {
+  const syncHeaderLine = () => siteHeader.classList.toggle("is-scrolled", window.scrollY > 8);
+  window.addEventListener("scroll", syncHeaderLine, { passive: true });
+  syncHeaderLine();
+}
+
 const stage = document.querySelector("[data-tilt]");
 
 if (stage) {
