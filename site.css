@@ -89,7 +89,9 @@ figcaption .numeral,
   display: grid;
   grid-template-columns: 1.05fr 0.95fr;
   gap: clamp(32px, 6vw, 96px);
-  align-items: end;
+  /* yazı, sağdaki uzun görsele göre dikeyde ortalanır; alta hizalanınca
+     yüksek ekranlarda yazının üstünde büyük boşluk kalıyordu */
+  align-items: center;
 }
 
 .hero h1 {
@@ -352,6 +354,11 @@ figcaption .numeral,
 .statement {
   text-align: center;
   border-top: 1px solid var(--line);
+}
+
+/* footer'dan hemen önce: alt boşluk üstten daha dar */
+.section.statement {
+  padding-bottom: clamp(64px, 7vw, 112px);
 }
 
 .statement h2 {
