@@ -1501,3 +1501,31 @@ body.studio-body {
   border-top: 1px solid var(--line);
   padding-top: 12px;
 }
+
+/* ---------- boş sonuç alanı: çerçevesiz, ortada, üstünde çekiç logosu ---------- */
+.studio-body .result-empty {
+  min-height: clamp(320px, 52vh, 560px);
+  padding: 24px;
+  border: 0;
+  background: none;
+}
+
+.studio-body .result-empty .empty-logo {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 20px;
+  opacity: 0.85;
+}
+
+.studio-body .result-empty h4 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.studio-body .result-empty p {
+  margin-top: 10px;
+  font-size: 13px;
+}
